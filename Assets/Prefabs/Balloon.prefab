@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 7662756692323649912}
   - component: {fileID: 2970574267746853190}
   - component: {fileID: 6144813976478949522}
+  - component: {fileID: 3789699910772500374}
   m_Layer: 7
-  m_Name: balloon main (4)
+  m_Name: Balloon Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3098161862869689910}
   m_LocalRotation: {x: 0.50000006, y: 0.49999997, z: 0.50000006, w: -0.49999997}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 8138301906509104697}
   m_RootOrder: 0
@@ -96,6 +97,25 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300004, guid: bcf63894e65e46f40be7aeb69ae0be10, type: 3}
+--- !u!95 &3789699910772500374
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3098161862869689910}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a81cfaf961c3078479c8646ab8bbdd4a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7260247476292227130
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,8 +143,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7260247476292227130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.186, z: -0.1183}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3106542380646243043}
   m_Father: {fileID: 0}
@@ -182,6 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dfb4c9da039d443848ef30847a04e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upForce: 0.5
-  resizeSpeed: 1
-  rigidBody: {fileID: 4427317850909161349}
+  pop: {fileID: 0}
+  audioSource: {fileID: 0}
+  balloonCollider: {fileID: 6144813976478949522}

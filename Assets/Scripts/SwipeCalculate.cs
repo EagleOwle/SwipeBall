@@ -26,7 +26,7 @@ public class SwipeCalculate : MonoBehaviour
     [SerializeField] private float deadZone = 10;
     [SerializeField] private Vector2 tupPosition;
     [SerializeField] private Vector2 swipeDirection;
-
+    [SerializeField] private LayerMask rayMask;
     private bool onSwipe = false;
     private bool isMobilePlatform;
     private bool isDraggin = false;
@@ -60,6 +60,7 @@ public class SwipeCalculate : MonoBehaviour
             {
                 isDraggin = true;
                 tupPosition = Input.mousePosition;
+                ScreenRayCast(tupPosition, rayMask);
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -70,12 +71,14 @@ public class SwipeCalculate : MonoBehaviour
         }
         else
         {
+            
             if (Input.touchCount > 0)
             {
                 if (Input.touches[0].phase == TouchPhase.Began)
                 {
                     isDraggin = true;
                     tupPosition = Input.touches[0].position;
+                    ScreenRayCast(tupPosition, rayMask);
                 }
 
                 if (Input.touches[0].phase == TouchPhase.Canceled || Input.touches[0].phase == TouchPhase.Ended)
@@ -115,4 +118,13 @@ public class SwipeCalculate : MonoBehaviour
         swipeDirection = Vector2.zero;
     }
 
+    private void ScreenRayCast(Vector2 screenPosition, LayerMask  mask)
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+        if(Physics.Raycast(ray, out hit, float.MaxValue, mask))
+        {
+            EventSpace.ScreenRayHitCollider.Invoke(hit.collider);
+        }
+    }
 }
