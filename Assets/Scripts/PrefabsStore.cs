@@ -25,9 +25,9 @@ public class PrefabsStore : ScriptableObject
     #endregion
 
     [SerializeField] private PoolElement[] poolingPrefabs;
-    public PoolElement[] Prefabs => poolingPrefabs;
+    public PoolElement[] PoolingPrefabs => poolingPrefabs;
 
-    public PoolElement GetPrefabOfType(PoolElementType type)
+    public PoolElement GetPoolingPrefabOfType(PoolElementType type)
     {
         foreach (var item in poolingPrefabs)
         {
@@ -41,4 +41,6 @@ public class PrefabsStore : ScriptableObject
         return null;
     }
 
+    [SerializeField] private Item[] itemPrefabs;
+    public Item[] ItemPrefabs => itemPrefabs;
 }

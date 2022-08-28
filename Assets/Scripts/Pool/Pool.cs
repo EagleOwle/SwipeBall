@@ -28,7 +28,7 @@ public class Pool : MonoBehaviour
     {
         pooledObjects = new List<PoolElement>();
 
-        foreach (var item in PrefabsStore.Instance.Prefabs)
+        foreach (var item in PrefabsStore.Instance.PoolingPrefabs)
         {
             for (int i = 0; i < amountToPool; i++)
             {
@@ -81,7 +81,7 @@ public class Pool : MonoBehaviour
     
     private PoolElement InstantiateNewObject(PoolElementType type)
     {
-        PoolElement prefab = PrefabsStore.Instance.GetPrefabOfType(type);
+        PoolElement prefab = PrefabsStore.Instance.GetPoolingPrefabOfType(type);
         PoolElement tmp = Instantiate(prefab);
         pooledObjects.Add(tmp);
         ReturnToPool(tmp);

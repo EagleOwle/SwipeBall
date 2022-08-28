@@ -15,3 +15,5 @@ MonoBehaviour:
   poolingPrefabs:
   - {fileID: 6923548086554284748, guid: cb298fe361cc3144b81518b4827022bb, type: 3}
   - {fileID: -7994130024472164892, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
+  itemPrefabs:
+  - {fileID: 4947184301504184560, guid: aa978bb2035b8e545b108cc9bce2617a, type: 3}

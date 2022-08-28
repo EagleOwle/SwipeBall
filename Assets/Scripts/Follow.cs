@@ -23,7 +23,8 @@ public class Follow : MonoBehaviour
         }
     }
 
-    [SerializeField] private float smooth = 1;
+    [SerializeField] private float smoothLook = 1;
+    [SerializeField] private float smoothMove = 1;
     [SerializeField] private float distanceBase = 5f;
     [SerializeField] private Vector3 offset;
 
@@ -40,8 +41,17 @@ public class Follow : MonoBehaviour
             return;
         }
 
-        transform.LookAt(target.position);
+        //transform.LookAt(target.position);
+        LookAtTarget(target);
         FollowDirection(target.position);
+    }
+
+    private void LookAtTarget(Transform target)
+    {
+        Vector3 relativePos = target.position - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, Time.time * smoothLook);
+        //transform.rotation = rotation;
     }
 
     private void FollowDirection(Vector3 targetPosition)
@@ -51,7 +61,7 @@ public class Follow : MonoBehaviour
 
         Debug.DrawLine(transform.position, nextPosition, Color.red);
         nextPosition.y = Mathf.Clamp(nextPosition.y, 3, 5);
-        transform.position = Vector3.Lerp(transform.position, nextPosition, Time.deltaTime * smooth);
+        transform.position = Vector3.Lerp(transform.position, nextPosition, Time.deltaTime * smoothMove);
         
     }
 }

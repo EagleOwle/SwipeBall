@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Push : MonoBehaviour
 {
     [SerializeField] private float power = 10;
@@ -14,6 +15,11 @@ public class Push : MonoBehaviour
     private Ray ray;
     private Vector3 tupScreenPosition;
 
+    public void Enable(bool value)
+    {
+        enabled = value;
+    }
+
     private void Update()
     {
         if (SwipeCalculate.Instance.OnSwipe)
@@ -23,7 +29,6 @@ public class Push : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100, mazeMask))
             {
                 tupScreenPosition = hit.point;
-                //Debug.DrawLine(tupScreenPosition, tupScreenPosition + Vector3.up, Color.red, 1);
             }
 
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -31,7 +36,6 @@ public class Push : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100, ballMask))
             {
                 rigidbody.AddForce((transform.position - tupScreenPosition) * power);
-                //Debug.DrawLine(tupScreenPosition, tupScreenPosition + (transform.position - tupScreenPosition), Color.red, 1);
 
                 audioSource.PlayOneShot(push);
                 SwipeCalculate.Instance.ResetSwipe();
@@ -39,4 +43,6 @@ public class Push : MonoBehaviour
         }
 
     }
+    
+
 }
