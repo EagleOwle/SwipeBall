@@ -131,7 +131,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -156,6 +156,7 @@ MonoBehaviour:
   - {fileID: 5534367714270349974}
   - {fileID: 3246719209452177373}
   - {fileID: 5248050543907305825}
+  rigidbody: {fileID: 9208025465608251072}
 --- !u!82 &3857966425411024860
 AudioSource:
   m_ObjectHideFlags: 0
@@ -275,9 +276,13 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 3857966425411024860}
+    - target: {fileID: 2130785275116902072, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+      propertyPath: constantForce
+      value: 
+      objectReference: {fileID: 6828119821891815777}
     - target: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
       propertyPath: m_Force.y
-      value: 0.2
+      value: 10.2
       objectReference: {fileID: 0}
     - target: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
       propertyPath: m_RelativeForce.y
@@ -354,6 +359,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dfb4c9da039d443848ef30847a04e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!75 &6828119821891815777 stripped
+ConstantForce:
+  m_CorrespondingSourceObject: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+  m_PrefabInstance: {fileID: 191853922943198730}
+  m_PrefabAsset: {fileID: 0}
 --- !u!144 &4257878196774313756
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -423,9 +433,13 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 3857966425411024860}
+    - target: {fileID: 2130785275116902072, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+      propertyPath: constantForce
+      value: 
+      objectReference: {fileID: 6547107099630946043}
     - target: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
       propertyPath: m_Force.y
-      value: 0.2
+      value: 10.2
       objectReference: {fileID: 0}
     - target: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
       propertyPath: m_RelativeForce.y
@@ -502,6 +516,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dfb4c9da039d443848ef30847a04e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!75 &6547107099630946043 stripped
+ConstantForce:
+  m_CorrespondingSourceObject: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+  m_PrefabInstance: {fileID: 481955345759070608}
+  m_PrefabAsset: {fileID: 0}
 --- !u!144 &5261618858390207454
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -514,7 +533,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: -1, z: 0}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1, z: 0}
+  m_ConnectedAnchor: {x: 0.1151, y: -1, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -571,9 +590,13 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 3857966425411024860}
+    - target: {fileID: 2130785275116902072, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+      propertyPath: constantForce
+      value: 
+      objectReference: {fileID: 7851877435003731470}
     - target: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
       propertyPath: m_Force.y
-      value: 0.2
+      value: 10.2
       objectReference: {fileID: 0}
     - target: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
       propertyPath: m_RelativeForce.y
@@ -650,6 +673,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dfb4c9da039d443848ef30847a04e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!75 &7851877435003731470 stripped
+ConstantForce:
+  m_CorrespondingSourceObject: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+  m_PrefabInstance: {fileID: 3502876921856545125}
+  m_PrefabAsset: {fileID: 0}
 --- !u!144 &6349012386110697270
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -662,7 +690,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: -1, z: 0}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1, z: 0.1152}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -719,9 +747,13 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 3857966425411024860}
+    - target: {fileID: 2130785275116902072, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+      propertyPath: constantForce
+      value: 
+      objectReference: {fileID: 952466359204279109}
     - target: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
       propertyPath: m_Force.y
-      value: 0.2
+      value: 10.2
       objectReference: {fileID: 0}
     - target: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
       propertyPath: m_RelativeForce.y
@@ -777,6 +809,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+--- !u!1 &3863388550054759444 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7260247476292227130, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+  m_PrefabInstance: {fileID: 5862587161173318702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2426623816380471831 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8138301906509104697, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+  m_PrefabInstance: {fileID: 5862587161173318702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5534367714270349974 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2130785275116902072, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
@@ -788,14 +830,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dfb4c9da039d443848ef30847a04e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2426623816380471831 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8138301906509104697, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
-  m_PrefabInstance: {fileID: 5862587161173318702}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3863388550054759444 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7260247476292227130, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+--- !u!75 &952466359204279109 stripped
+ConstantForce:
+  m_CorrespondingSourceObject: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
   m_PrefabInstance: {fileID: 5862587161173318702}
   m_PrefabAsset: {fileID: 0}
 --- !u!144 &8566201091162363582
@@ -810,7 +847,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: -1, z: 0}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1, z: 0}
+  m_ConnectedAnchor: {x: -0.1175, y: -1, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -867,9 +904,13 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 3857966425411024860}
+    - target: {fileID: 2130785275116902072, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+      propertyPath: constantForce
+      value: 
+      objectReference: {fileID: 661188209039573170}
     - target: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
       propertyPath: m_Force.y
-      value: 0.2
+      value: 10.2
       objectReference: {fileID: 0}
     - target: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
       propertyPath: m_RelativeForce.y
@@ -925,6 +966,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+--- !u!75 &661188209039573170 stripped
+ConstantForce:
+  m_CorrespondingSourceObject: {fileID: 6659628599452184427, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+  m_PrefabInstance: {fileID: 6144813975408881625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3568917290865475555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7260247476292227130, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+  m_PrefabInstance: {fileID: 6144813975408881625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2717867082300926432 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8138301906509104697, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
+  m_PrefabInstance: {fileID: 6144813975408881625}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5248050543907305825 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2130785275116902072, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
@@ -936,16 +992,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dfb4c9da039d443848ef30847a04e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &3568917290865475555 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7260247476292227130, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
-  m_PrefabInstance: {fileID: 6144813975408881625}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2717867082300926432 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8138301906509104697, guid: b4ebd9f9c10510c46b94764a0559a811, type: 3}
-  m_PrefabInstance: {fileID: 6144813975408881625}
-  m_PrefabAsset: {fileID: 0}
 --- !u!144 &1164001734104614900
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -958,7 +1004,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: -1, z: 0}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1, z: -0.1183}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 0}
   m_TwistLimitSpring:

@@ -60,7 +60,7 @@ public class Pool : MonoBehaviour
         return tmp;
     }
 
-    public void SpawnPooledObject(PoolElementType type, Vector3 position, Quaternion rotation)
+    public GameObject SpawnPooledObject(PoolElementType type, Vector3 position, Quaternion rotation)
     {
         PoolElement tmp = GetPooledObject(type);
         
@@ -69,6 +69,8 @@ public class Pool : MonoBehaviour
         tmp.transform.parent = null;
         tmp.gameObject.SetActive(true);
         tmp.Instantiate();
+
+        return tmp.gameObject;
     }
 
     public void ReturnToPool(PoolElement instance)

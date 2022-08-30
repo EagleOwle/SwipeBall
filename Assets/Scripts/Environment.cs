@@ -3,19 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class Environment : MonoBehaviour
+public interface IItemCount
 {
-    public Action<int> actionChangeItemCount;
+    event EventHandler<int> ChangeItemCount;
+    event EventHandler EndItem;
+    int CurrentItemCount();
+}
 
+public class Environment : MonoBehaviour, IItemCount
+{
+    public event EventHandler<int> ChangeItemCount;
+    public event EventHandler EndItem;
+
+    [SerializeField] private Follow follow;
+    [SerializeField] private MainSpawnPoint ballSpawnPoint;
     [SerializeField] private SpawnPoint[] spawnPoints;
     private List<Item> items = new List<Item>();
 
-    //private void OnValidate()
-    //{
-    //    spawnPoints = GameObject.FindObjectsOfType<SpawnPoint>();
-    //}
+    private Ball ball;
 
-    public void Initialise()
+    public void Initialise(IChangeGameSate changeGameSate)
     {
         foreach (var item in spawnPoints)
         {
@@ -23,13 +30,54 @@ public class Environment : MonoBehaviour
             tmp.actionOnHit += RemoveItem;
             items.Add(tmp);
         }
+
+        changeGameSate.ChangeGameSate += ChangeGameSate;
+
+        ball = Instantiate(PrefabsStore.Instance.BallPrefab, ballSpawnPoint.transform.position, Quaternion.identity);
+        ball.Initialise(follow);
+
+        follow.actionSetTarget += CameraChangeFollow;
+
+    }
+
+    private void CameraChangeFollow(Transform followTarget)
+    {
+        if(followTarget == ball.transform)
+        {
+            if(items.Count<=0)
+            {
+                EndItem.Invoke(this, null);
+            }
+        }
+    }
+
+    private void ChangeGameSate(object sender, GameState state)
+    {
+        switch (state)
+        {
+            case GameState.Game:
+                ball.OnPushable = true;
+                break;
+            case GameState.Pause:
+                ball.OnPushable = false;
+                break;
+        }
     }
 
     private void RemoveItem(Item item)
     {
         items.Remove(item);
-        actionChangeItemCount.Invoke(items.Count);
+        ChangeItemCount?.Invoke(this, items.Count);
     }
 
+    int IItemCount.CurrentItemCount()
+    {
+        return items.Count;
+    }
 
+    [ExecuteInEditMode]
+    public void FindSpawnPoint()
+    {
+        spawnPoints = GameObject.FindObjectsOfType<SpawnPoint>();
+    }
 }

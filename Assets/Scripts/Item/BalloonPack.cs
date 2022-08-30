@@ -9,6 +9,8 @@ public class BalloonPack : PoolElement
     [SerializeField] private float liveTime = 5;
     [SerializeField] private Balloon[] balloons;
 
+    [SerializeField] private Rigidbody rigidbody;
+
     private void Awake()
     {
         balloons = GetComponentsInChildren<Balloon>();
@@ -21,6 +23,10 @@ public class BalloonPack : PoolElement
     private void BalloonOnTouch(Balloon balloon)
     {
         balloon.gameObject.SetActive(false);
+
+        float nextMass = rigidbody.mass - 1;
+        nextMass = Mathf.Clamp(nextMass, 1, balloons.Length);
+        rigidbody.mass = nextMass;
 
         foreach (var item in balloons)
         {
@@ -49,6 +55,9 @@ public class BalloonPack : PoolElement
                 balloons[i].Initialise();
             }
         }
+
+        rigidbody.mass = balloons.Length;
+
     }
 
     private void EndOfLive()

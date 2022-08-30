@@ -1,10 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
-    [SerializeField] private Transform defaultTarget;
+    public Action<Transform> actionSetTarget;
+    private Transform defaultTarget;
+    public Transform DefaultTarget
+    {
+        set
+        {
+            defaultTarget = value;
+        }
+        
+    }
+
     private Transform target;
     public Transform Target
     {
@@ -19,7 +30,7 @@ public class Follow : MonoBehaviour
                 target = value;
             }
 
-            EventSpace.SetFollowTarget.Invoke(target);
+            actionSetTarget.Invoke(target);
         }
     }
 
@@ -37,11 +48,10 @@ public class Follow : MonoBehaviour
     {
         if (target == null)
         {
-            Debug.LogError("Follow target is null");
+            Debug.LogWarning("Follow target is null");
             return;
         }
 
-        //transform.LookAt(target.position);
         LookAtTarget(target);
         FollowDirection(target.position);
     }
@@ -64,4 +74,5 @@ public class Follow : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, nextPosition, Time.deltaTime * smoothMove);
         
     }
+
 }

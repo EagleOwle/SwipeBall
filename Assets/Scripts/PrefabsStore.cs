@@ -43,4 +43,8 @@ public class PrefabsStore : ScriptableObject
 
     [SerializeField] private Item[] itemPrefabs;
     public Item[] ItemPrefabs => itemPrefabs;
+
+    [SerializeField]private Ball ballPrefab;
+    public Ball BallPrefab => ballPrefab;
+
 }

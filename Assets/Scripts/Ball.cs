@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private LayerMask cointMask;
     [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip hit;
@@ -13,9 +12,11 @@ public class Ball : MonoBehaviour
 
     private bool onTarget = false; 
 
-    private void Start()
+    public void Initialise(Follow follow)
     {
-        EventSpace.SetFollowTarget.AddListener(CameraChangeFollow);
+        follow.actionSetTarget += CameraChangeFollow;
+        follow.DefaultTarget = transform;
+        follow.Target = transform;
         onTarget = true;
     }
 
@@ -23,13 +24,10 @@ public class Ball : MonoBehaviour
     {
         if (!onTarget) return;
 
-        //if ((1 << other.gameObject.layer & cointMask) != 0)
+        if (other.TryGetComponent(out Coin coin))
         {
-            if (other.TryGetComponent(out Coin coin))
-            {
-                coin.OnHit();
-                audioSource.PlayOneShot(pic);
-            }
+            coin.OnHit();
+            audioSource.PlayOneShot(pic);
         }
     }
 
@@ -38,14 +36,12 @@ public class Ball : MonoBehaviour
         if(value != this.transform)
         {
             onTarget = false;
-            //rigidbody.velocity = Vector3.zero;
-            //rigidbody.angularVelocity = Vector3.zero;
-            push.Enable(false);
+            OnPushable = false;
         }
         else
         {
             onTarget = true;
-            push.Enable(true);
+            OnPushable = true;
         }
     }
 
@@ -53,4 +49,15 @@ public class Ball : MonoBehaviour
     {
         audioSource.PlayOneShot(hit);
     }
+
+    public bool OnPushable
+    {
+        set
+        {
+            if (onTarget == false) return;
+
+            push.Enable(value);
+        }
+    }
+
 }
