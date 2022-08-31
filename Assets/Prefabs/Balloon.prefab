@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2970574267746853190}
   - component: {fileID: 6144813976478949522}
   - component: {fileID: 3789699910772500374}
+  - component: {fileID: 2124916827001736245}
   m_Layer: 7
   m_Name: Balloon Mesh
   m_TagString: Untagged
@@ -116,6 +117,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2124916827001736245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3098161862869689910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b20dc384daf958146af47f8c560aff23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - {r: 1, g: 0, b: 0, a: 0.84313726}
+  - {r: 0.025201082, g: 1, b: 0, a: 0.84313726}
+  - {r: 0.11363649, g: 0, b: 1, a: 0.84313726}
+  - {r: 1, g: 0, b: 0.7684326, a: 0.84313726}
+  - {r: 0, g: 1, b: 0.78681874, a: 0.84313726}
+  render: {fileID: 2970574267746853190}
 --- !u!1 &7260247476292227130
 GameObject:
   m_ObjectHideFlags: 0

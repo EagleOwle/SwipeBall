@@ -1,5 +1,7 @@
 ﻿public enum PoolElementType
 {
     Firework,
-    Ballon
+    Ballon,
+    Hit,
+    Simple
 }

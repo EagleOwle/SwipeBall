@@ -64,9 +64,9 @@ public class Pool : MonoBehaviour
     {
         PoolElement tmp = GetPooledObject(type);
         
+        tmp.transform.parent = null;
         tmp.transform.position = position;
         tmp.transform.rotation = rotation;
-        tmp.transform.parent = null;
         tmp.gameObject.SetActive(true);
         tmp.Instantiate();
 

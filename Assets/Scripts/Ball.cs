@@ -28,6 +28,8 @@ public class Ball : MonoBehaviour
         {
             coin.OnHit();
             audioSource.PlayOneShot(pic);
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
         }
     }
 
@@ -47,6 +49,7 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Pool.Instance.SpawnPooledObject(PoolElementType.Hit, transform.position, Quaternion.identity);
         audioSource.PlayOneShot(hit);
     }
 
