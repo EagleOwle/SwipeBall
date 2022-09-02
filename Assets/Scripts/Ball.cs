@@ -24,7 +24,7 @@ public class Ball : MonoBehaviour
     {
         if (!onTarget) return;
 
-        if (other.TryGetComponent(out Coin coin))
+        if (other.TryGetComponent(out Item coin))
         {
             coin.OnHit();
             audioSource.PlayOneShot(pic);

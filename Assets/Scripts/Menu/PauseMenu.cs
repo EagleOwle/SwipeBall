@@ -8,6 +8,7 @@ public class PauseMenu : BaseMenu
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private Slider musicValumeSlider;
+    [SerializeField] private AudioSource audioSource;
 
     public override void Initialise(ManagerMenu managerMenu)
     {
@@ -25,8 +26,8 @@ public class PauseMenu : BaseMenu
 
     private void OnVolumeChenge(float value)
     {
-        //audioSource.volume = value;
-        //PlayerPrefs.SetFloat("MusicVolume", value);
+        audioSource.volume = value;
+        PlayerPrefs.SetFloat("MusicVolume", value);
     }
 
     private void OnExitButton()

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Coin : Item
 {
-    public void OnHit()
+    public override void OnHit()
     {
         if (Pool.Instance  == null)
         {

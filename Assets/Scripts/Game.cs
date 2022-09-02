@@ -16,7 +16,7 @@ public class Game : MonoBehaviour, IChangeGameSate
 {
     [SerializeField] private ManagerMenu managerMenu;
     [SerializeField] private Environment environment;
-
+    [SerializeField] private AudioSource audioSource;
     public event EventHandler<GameState> ChangeGameSate;
 
     private void Start()
@@ -25,7 +25,9 @@ public class Game : MonoBehaviour, IChangeGameSate
 
         managerMenu.actionChangeGameState += OnChangeGameState;
         managerMenu.Initialise(environment);
-        
+
+        float musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+        audioSource.volume = musicVolume;
     }
 
     private void OnChangeGameState(GameState state)
