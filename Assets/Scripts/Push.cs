@@ -10,12 +10,15 @@ public class Push : MonoBehaviour
     [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip push;
+    [SerializeField] private SleepCalculate sleepCalculate;
+
     private RaycastHit hit;
     private Ray ray;
     private Vector3 tupScreenPosition;
 
     public void Enable(bool value)
     {
+        sleepCalculate.Enable(value);
         enabled = value;
     }
 
@@ -23,6 +26,8 @@ public class Push : MonoBehaviour
     {
         if (SwipeCalculate.Instance.OnSwipe)
         {
+            sleepCalculate.Break();
+
             ray = Camera.main.ScreenPointToRay(SwipeCalculate.Instance.TupScreenPosition);
 
             if (Physics.Raycast(ray, out hit, 100, mazeMask))

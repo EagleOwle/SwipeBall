@@ -4,7 +4,7 @@ using UnityEngine;
 public enum GameState
 {
     Game,
-    Pause
+    Pause,
 }
 
 public interface IChangeGameSate
@@ -14,10 +14,11 @@ public interface IChangeGameSate
 
 public class Game : MonoBehaviour, IChangeGameSate
 {
+    public event EventHandler<GameState> ChangeGameSate;
+
     [SerializeField] private ManagerMenu managerMenu;
     [SerializeField] private Environment environment;
     [SerializeField] private AudioSource audioSource;
-    public event EventHandler<GameState> ChangeGameSate;
 
     private void Start()
     {

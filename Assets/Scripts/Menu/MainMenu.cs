@@ -8,11 +8,20 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Button startButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private AudioSource audioSource;
 
     private void Start()
     {
         startButton.onClick.AddListener(StartGame);
         quitButton.onClick.AddListener(QuitApplication);
+    }
+
+    private void OnEnable()
+    {
+        if (PlayerPrefs.HasKey("MusicVolume"))
+        {
+            audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
+        }
     }
 
     private void StartGame()

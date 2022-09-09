@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SimpleEffect : PoolElement
 {
-    public override void Instantiate()
+    public override void FromPool()
     {
         StartCoroutine(CheckIfAlive());
     }

@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour
     [SerializeField] private AudioClip hit;
     [SerializeField] private AudioClip pic;
     [SerializeField] private Push push;
+    [SerializeField] private SleepCalculate sleepCalculate;
+    [SerializeField] private TutorialMenu tutorialMenu;
 
     private bool onTarget = false; 
 
@@ -18,6 +20,10 @@ public class Ball : MonoBehaviour
         follow.DefaultTarget = transform;
         follow.Target = transform;
         onTarget = true;
+
+        sleepCalculate.eventIsSleep += IsSleep;
+        tutorialMenu.Hide();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,10 +63,14 @@ public class Ball : MonoBehaviour
     {
         set
         {
-            if (onTarget == false) return;
-
             push.Enable(value);
+            sleepCalculate.Enable(value);
         }
+    }
+
+    private void IsSleep()
+    {
+        tutorialMenu.Show();
     }
 
 }

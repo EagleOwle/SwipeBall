@@ -1,24 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SwipeCalculate : MonoBehaviour
 {
-    #region SINGLETON
-    private static SwipeCalculate _instance;
+    private static SwipeCalculate instance;
     public static SwipeCalculate Instance
     {
         get
         {
-            if (_instance == null)
+            if(instance == null)
             {
-                _instance = GameObject.FindObjectOfType<SwipeCalculate>();
+                instance = GameObject.FindObjectOfType<SwipeCalculate>();
             }
-            return _instance;
+
+            return instance;
         }
     }
-    #endregion
 
+    private bool onSwipe = false;
     public bool OnSwipe => onSwipe;
     public Vector2 SwipeScreenDirection => swipeDirection;
     public Vector2 TupScreenPosition => tupPosition;
@@ -27,9 +28,11 @@ public class SwipeCalculate : MonoBehaviour
     [SerializeField] private Vector2 tupPosition;
     [SerializeField] private Vector2 swipeDirection;
     [SerializeField] private LayerMask rayMask;
-    private bool onSwipe = false;
+        
     private bool isMobilePlatform;
     private bool isDraggin = false;
+
+    private bool isWork = true;
 
     private void Awake()
     {
@@ -48,8 +51,15 @@ public class SwipeCalculate : MonoBehaviour
 
     private void Update()
     {
+        if (isWork == false)
+        {
+            ResetSwipe();
+            return;
+        }
+
         ControlInput();
         Swipe();
+
     }
 
     private void ControlInput()
@@ -58,9 +68,7 @@ public class SwipeCalculate : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                isDraggin = true;
-                tupPosition = Input.mousePosition;
-                ScreenRayCast(tupPosition, rayMask);
+                OnDragging(Input.mousePosition);
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -71,14 +79,11 @@ public class SwipeCalculate : MonoBehaviour
         }
         else
         {
-            
             if (Input.touchCount > 0)
             {
                 if (Input.touches[0].phase == TouchPhase.Began)
                 {
-                    isDraggin = true;
-                    tupPosition = Input.touches[0].position;
-                    ScreenRayCast(tupPosition, rayMask);
+                    OnDragging(Input.touches[0].position);
                 }
 
                 if (Input.touches[0].phase == TouchPhase.Canceled || Input.touches[0].phase == TouchPhase.Ended)
@@ -127,4 +132,12 @@ public class SwipeCalculate : MonoBehaviour
             EventSpace.ScreenRayHitCollider.Invoke(hit.collider);
         }
     }
+
+    private void OnDragging(Vector3 tupPosition)
+    {
+        isDraggin = true;
+        this.tupPosition = tupPosition;
+        ScreenRayCast(tupPosition, rayMask);
+    }
+
 }

@@ -6,7 +6,7 @@ public abstract class PoolElement : MonoBehaviour
 {
     public PoolElementType type;
 
-    public virtual void Instantiate()
+    public virtual void FromPool()
     {
 
     }

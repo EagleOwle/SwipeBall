@@ -8,8 +8,10 @@ public class BalloonPack : PoolElement
 {
     [SerializeField] private float liveTime = 5;
     [SerializeField] private Balloon[] balloons;
-
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private Rigidbody rigidbody;
+
+    private List<Balloon> activeBalloons;
 
     private void Awake()
     {
@@ -20,44 +22,46 @@ public class BalloonPack : PoolElement
         }
     }
 
-    private void BalloonOnTouch(Balloon balloon)
+    private void FixedUpdate()
     {
-        balloon.gameObject.SetActive(false);
-
-        float nextMass = rigidbody.mass - 1;
-        nextMass = Mathf.Clamp(nextMass, 1, balloons.Length);
-        rigidbody.mass = nextMass;
-
-        foreach (var item in balloons)
+        if(transform.position.y > 1)
         {
-            if (item.gameObject.activeSelf)
-            {
-                return;
-            }
+            rigidbody.velocity = Vector3.zero;
         }
-
-        EndOfLive();
     }
 
-    public override void Instantiate()
+    private void BalloonOnTouch(Balloon balloon)
     {
-        GameObject.FindObjectOfType<Follow>().Target = transform;
+        balloon.Disable();
+
+        activeBalloons.Remove(balloon);
+        rigidbody.mass = activeBalloons.Count;
+
+        if (activeBalloons.Count == 0)
+        {
+            float length = audioSource.clip.length;
+            Invoke(nameof(EndOfLive), length + Time.deltaTime);
+        }
+    }
+
+    public override void FromPool()
+    {
+       GameObject.FindObjectOfType<Follow>().Target = transform;
         for (int i = 0; i < balloons.Length; i++)
         {
-            balloons[i].gameObject.SetActive(true);
-
             if (liveTime > 0)
             {
-                balloons[i].Initialise((i + 1) * liveTime);
+                balloons[i].Initialise((i + 1) * liveTime, audioSource);
             }
             else
             {
-                balloons[i].Initialise();
+                balloons[i].Initialise(audioSource);
             }
         }
 
-        rigidbody.mass = balloons.Length;
-
+        activeBalloons = balloons.ToList();
+        rigidbody.mass = activeBalloons.Count;
+        //Debug.Break();
     }
 
     private void EndOfLive()

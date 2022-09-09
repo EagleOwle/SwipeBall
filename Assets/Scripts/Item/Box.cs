@@ -12,9 +12,8 @@ public class Box : Item, IAnimationEvent
     public Material[] materials;
     [SerializeField] private Renderer renderer;
     [SerializeField] private Animator animator;
-    [SerializeField] private float hideSpeed = 0.1f;
+    [SerializeField] private float hideSpeed = 0.5f;
     private int openParamID;
-    private float dissolve = 0;
 
     private void Awake()
     {
@@ -37,7 +36,6 @@ public class Box : Item, IAnimationEvent
             return;
         }
 
-        //Pool.Instance.SpawnPooledObject(PoolElementType.Firework, transform.position, Quaternion.identity);
         Pool.Instance.SpawnPooledObject(PoolElementType.Hit, transform.position, Quaternion.identity);
         Quaternion rotation = Quaternion.Euler(-90, 0, 0);
         Pool.Instance.SpawnPooledObject(PoolElementType.Simple, transform.position, rotation);
@@ -46,7 +44,7 @@ public class Box : Item, IAnimationEvent
         actionOnHit.Invoke(this);
         animator.SetTrigger(openParamID);
         animator.speed = 1;
-        // Destroy(gameObject);
+        
 
         Invoke(nameof(ShowSurprize), 1);
     }
@@ -58,7 +56,7 @@ public class Box : Item, IAnimationEvent
 
     private IEnumerator WaitOfAlpha()
     {
-        //dissolve = 1;
+       float dissolve = 0;
         while (dissolve < 1)
         {
             yield return new WaitForEndOfFrame();
@@ -67,8 +65,7 @@ public class Box : Item, IAnimationEvent
             
         }
 
-        //renderer.material.SetFloat("_Dissolve", 0);
-        Debug.Log("End While");
+        Destroy(gameObject);
     }
 
     public void AnimationStateEvent()

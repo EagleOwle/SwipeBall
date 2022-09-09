@@ -7,7 +7,7 @@ public class Fireworks : PoolElement
 {
     public UnityEvent eventEndLive;
 
-    public override void Instantiate()
+    public override void FromPool()
     {
         StartCoroutine(CheckIfAlive());
     }

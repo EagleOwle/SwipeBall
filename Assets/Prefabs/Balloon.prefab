@@ -198,9 +198,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dfb4c9da039d443848ef30847a04e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pop: {fileID: 0}
-  audioSource: {fileID: 0}
+  pop: {fileID: 8300000, guid: ea18566d8ed224d44b50ff5c909826f3, type: 3}
   balloonCollider: {fileID: 6144813976478949522}
+  meshTransform: {fileID: 3106542380646243043}
 --- !u!75 &6659628599452184427
 ConstantForce:
   m_ObjectHideFlags: 0
@@ -209,7 +209,7 @@ ConstantForce:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7260247476292227130}
   m_Enabled: 1
-  m_Force: {x: 0, y: 0.1, z: 0}
+  m_Force: {x: 0, y: 12, z: 0}
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}

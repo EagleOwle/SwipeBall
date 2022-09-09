@@ -60,6 +60,12 @@ public class Pool : MonoBehaviour
         return tmp;
     }
 
+    public PoolElement GetNewPooledObject(PoolElementType type)
+    {
+        PoolElement tmp = InstantiateNewObject(type);
+        return tmp;
+    }
+
     public GameObject SpawnPooledObject(PoolElementType type, Vector3 position, Quaternion rotation)
     {
         PoolElement tmp = GetPooledObject(type);
@@ -68,7 +74,20 @@ public class Pool : MonoBehaviour
         tmp.transform.position = position;
         tmp.transform.rotation = rotation;
         tmp.gameObject.SetActive(true);
-        tmp.Instantiate();
+        tmp.FromPool();
+
+        return tmp.gameObject;
+    }
+
+    public GameObject SpawnNewPooledObject(PoolElementType type, Vector3 position, Quaternion rotation)
+    {
+        PoolElement tmp = GetNewPooledObject(type);
+
+        tmp.transform.parent = null;
+        tmp.transform.position = position;
+        tmp.transform.rotation = rotation;
+        tmp.gameObject.SetActive(true);
+        tmp.FromPool();
 
         return tmp.gameObject;
     }

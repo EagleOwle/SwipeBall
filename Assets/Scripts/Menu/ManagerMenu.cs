@@ -13,6 +13,7 @@ public class ManagerMenu : MonoBehaviour
     [SerializeField] private PauseMenu pausePanel;
     [SerializeField] private WinMenu winPanel;
 
+
     public void Initialise(IItemCount itemCount)
     {
         gamePanel.Initialise(itemCount, this);
@@ -21,7 +22,6 @@ public class ManagerMenu : MonoBehaviour
         HidePauseMenu();
         HideWinMenu();
 
-        //itemCount.ChangeItemCount += ChangeItemCount;
         itemCount.EndItem += EndItem;
         actionChangeGameState.Invoke(GameState.Game);
     }
@@ -70,5 +70,4 @@ public class ManagerMenu : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
 }
