@@ -6,12 +6,14 @@ using UnityEngine.Events;
 
 public class BalloonPack : PoolElement
 {
-    [SerializeField] private float liveTime = 5;
+    [SerializeField] private float balloonLiveTime = 5;
     [SerializeField] private Balloon[] balloons;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private Rigidbody rigidbody;
-
+    [SerializeField] private AnimationCurve speedCurve;
+    [SerializeField] private float curveMultiplier = 5;
     private List<Balloon> activeBalloons;
+    private float curveTime;
 
     private void Awake()
     {
@@ -22,11 +24,20 @@ public class BalloonPack : PoolElement
         }
     }
 
-    private void FixedUpdate()
+    private IEnumerator Fly()
     {
-        if(transform.position.y > 1)
+        while (true)
         {
-            rigidbody.velocity = Vector3.zero;
+            yield return new WaitForFixedUpdate();
+
+            float speed = speedCurve.Evaluate(curveTime) * Time.deltaTime;
+            Vector3 nextPosition = Vector3.MoveTowards(transform.position, transform.position + Vector3.up, speed);
+            rigidbody.MovePosition(nextPosition);
+
+            if (transform.position.y > curveTime * curveMultiplier)
+            {
+                curveTime += 0.1f;
+            }
         }
     }
 
@@ -35,7 +46,6 @@ public class BalloonPack : PoolElement
         balloon.Disable();
 
         activeBalloons.Remove(balloon);
-        rigidbody.mass = activeBalloons.Count;
 
         if (activeBalloons.Count == 0)
         {
@@ -46,12 +56,12 @@ public class BalloonPack : PoolElement
 
     public override void FromPool()
     {
-       GameObject.FindObjectOfType<Follow>().Target = transform;
+        GameObject.FindObjectOfType<Follow>().Target = transform;
         for (int i = 0; i < balloons.Length; i++)
         {
-            if (liveTime > 0)
+            if (balloonLiveTime > 0)
             {
-                balloons[i].Initialise((i + 1) * liveTime, audioSource);
+                balloons[i].Initialise((i + 1) * balloonLiveTime, audioSource);
             }
             else
             {
@@ -60,12 +70,13 @@ public class BalloonPack : PoolElement
         }
 
         activeBalloons = balloons.ToList();
-        rigidbody.mass = activeBalloons.Count;
-        //Debug.Break();
+        curveTime = 0;
+        StartCoroutine(Fly());
     }
 
     private void EndOfLive()
     {
+        StopAllCoroutines();
         GameObject.FindObjectOfType<Follow>().Target = null;
         ToPool();
     }

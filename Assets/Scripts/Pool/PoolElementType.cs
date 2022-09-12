@@ -3,5 +3,6 @@
     Firework,
     Ballon,
     Hit,
-    Simple
+    Simple,
+    Rain
 }

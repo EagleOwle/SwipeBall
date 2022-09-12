@@ -555,7 +555,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f0b12b1d80d7a674390fb8979412b25b, type: 2}
   renderer: {fileID: 1447504016018650883}
   animator: {fileID: 3965351543664352284}
-  hideSpeed: 0.5
+  hideSpeed: 0.1
 --- !u!65 &3076832533452430457
 BoxCollider:
   m_ObjectHideFlags: 0

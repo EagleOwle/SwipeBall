@@ -42,6 +42,7 @@ public partial class Balloon : Item
         if (Pool.Instance != null)
         {
             Pool.Instance.SpawnPooledObject(PoolElementType.Firework, transform.position, Quaternion.identity);
+            Pool.Instance.SpawnPooledObject(PoolElementType.Rain, transform.position, Quaternion.identity);
         }
 
         CancelInvoke();
