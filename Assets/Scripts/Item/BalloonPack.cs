@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class BalloonPack : PoolElement
+public class BalloonPack : Present
 {
     [SerializeField] private float balloonLiveTime = 5;
     [SerializeField] private Balloon[] balloons;
@@ -54,7 +53,7 @@ public class BalloonPack : PoolElement
         }
     }
 
-    public override void FromPool()
+    public override void Initialise()
     {
         GameObject.FindObjectOfType<Follow>().Target = transform;
         for (int i = 0; i < balloons.Length; i++)
@@ -74,11 +73,11 @@ public class BalloonPack : PoolElement
         StartCoroutine(Fly());
     }
 
-    private void EndOfLive()
+    public override void EndOfLive()
     {
         StopAllCoroutines();
         GameObject.FindObjectOfType<Follow>().Target = null;
-        ToPool();
+        Destroy(gameObject);
     }
 
 }

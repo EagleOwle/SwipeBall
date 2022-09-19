@@ -48,7 +48,7 @@ public class Follow : MonoBehaviour
     {
         if (target == null)
         {
-            Debug.LogWarning("Follow target is null");
+            //Debug.LogWarning("Follow target is null");
             return;
         }
 

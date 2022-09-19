@@ -43,6 +43,9 @@ public partial class Balloon : Item
         {
             Pool.Instance.SpawnPooledObject(PoolElementType.Firework, transform.position, Quaternion.identity);
             Pool.Instance.SpawnPooledObject(PoolElementType.Rain, transform.position, Quaternion.identity);
+
+            //BallPresent presentPrefab = PrefabsStore.Instance.balls[0].present;
+            //Instantiate(presentPrefab, transform.position, Quaternion.identity);
         }
 
         CancelInvoke();

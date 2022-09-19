@@ -33,11 +33,14 @@ public class Environment : MonoBehaviour, IItemCount
 
         changeGameSate.ChangeGameSate += ChangeGameSate;
 
-        ball = Instantiate(PrefabsStore.Instance.BallPrefab, ballSpawnPoint.transform.position, Quaternion.identity);
-        ball.Initialise(follow);
-
         follow.actionSetTarget += CameraChangeFollow;
 
+    }
+
+    public void SpawnBall(Ball ballPrefab)
+    {
+        ball = Instantiate(ballPrefab, ballSpawnPoint.transform.position, Quaternion.identity);
+        ball.Initialise(follow);
     }
 
     private void CameraChangeFollow(Transform followTarget)
@@ -53,6 +56,8 @@ public class Environment : MonoBehaviour, IItemCount
 
     private void ChangeGameSate(object sender, GameState state)
     {
+        if (ball == null) return;
+
         switch (state)
         {
             case GameState.Game:

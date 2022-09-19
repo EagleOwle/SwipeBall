@@ -105,6 +105,8 @@ public class SwipeCalculate : MonoBehaviour
 
         swipeDirection =  (Vector2)Input.mousePosition - tupPosition;
 
+        DrawScreenGizmos.Instance.DrawLine(Input.mousePosition, tupPosition);
+
         if (swipeDirection.magnitude > deadZone)
         {
             onSwipe = true;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PrefabsStore : ScriptableObject
 {
@@ -44,7 +45,63 @@ public class PrefabsStore : ScriptableObject
     [SerializeField] private Item[] itemPrefabs;
     public Item[] ItemPrefabs => itemPrefabs;
 
-    [SerializeField]private Ball ballPrefab;
-    public Ball BallPrefab => ballPrefab;
+    [SerializeField] private Present[] presentPrefabs;
+    public Present[] PresentPrefabs => presentPrefabs;
+    public Present RandomPresent
+    {
+        get
+        {
+            int rnd = Random.Range(0, presentPrefabs.Length);
+            Present present = presentPrefabs[rnd];
+            return present;
+        }
+    }
+
+    public List<PresentPreference> balls;
+    public Ball GetPrefabBallByName(string ballName)
+    {
+        foreach (var item in balls)
+        {
+            if (item.name == ballName)
+            {
+                return item.ballPrefab;
+            }
+        }
+
+        Debug.LogError("No Ball Preference by Name");
+        return null;
+    }
+
+    public void SetCurrentBall(int index)
+    {
+        for (int i = 0; i < balls.Count; i++)
+        {
+            if (i == index)
+            {
+                balls[i].current = true;
+            }
+            else
+            {
+                balls[i].current = false;
+            }
+        }
+    }
+
+    public Ball CurrentBallPrefab
+    {
+        get
+        {
+            foreach (var item in balls)
+            {
+                if (item.current == true)
+                {
+                    return item.ballPrefab;
+                }
+            }
+
+            Debug.LogError("No current ball in Present Preference");
+            return null;
+        }
+    }
 
 }

@@ -51,7 +51,8 @@ public class Box : Item, IAnimationEvent
 
     private void ShowSurprize()
     {
-        Pool.Instance.SpawnPooledObject(PoolElementType.Ballon, transform.position + Vector3.up, Quaternion.identity);
+        Present present = Instantiate(PrefabsStore.Instance.RandomPresent, transform.position + Vector3.up, Quaternion.identity);
+        present.Initialise();
     }
 
     private IEnumerator WaitOfAlpha()
