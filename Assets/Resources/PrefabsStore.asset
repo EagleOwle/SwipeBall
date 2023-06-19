@@ -22,16 +22,18 @@ MonoBehaviour:
   - {fileID: 6671089666222598676, guid: 6e4d88e30f34d8843b05e367fa6f9657, type: 3}
   presentPrefabs:
   - {fileID: 6923548086554284748, guid: cb298fe361cc3144b81518b4827022bb, type: 3}
-  - {fileID: 3318913908334193615, guid: f4dc50ae4e7b45848973a5429e694e3d, type: 3}
-  - {fileID: 2289340597409778839, guid: 46f54dc1242e2d04580747eabd287fb0, type: 3}
   balls:
   - name: SoccerBall
-    acces: 0
-    ballPrefab: {fileID: 4277924265374958854, guid: d6932f6056a5b8b41ba775fbff6ccaa9, type: 3}
-    viewePrefab: {fileID: 4015463110202377882, guid: d37c289b83c35e74780777bcfa68bc06, type: 3}
+    acces: 2
+    ballPrefab: {fileID: 4277924265374958854, guid: d6932f6056a5b8b41ba775fbff6ccaa9,
+      type: 3}
+    viewePrefab: {fileID: 4015463110202377882, guid: d37c289b83c35e74780777bcfa68bc06,
+      type: 3}
     current: 1
   - name: BasketBall
-    acces: 1
-    ballPrefab: {fileID: 920267888410600622, guid: 556a973ee7a266641b556bb18acf435a, type: 3}
-    viewePrefab: {fileID: 4870488559202035753, guid: 3a0299534dafb7849af8c54fd709d721, type: 3}
+    acces: 2
+    ballPrefab: {fileID: 920267888410600622, guid: 556a973ee7a266641b556bb18acf435a,
+      type: 3}
+    viewePrefab: {fileID: 4870488559202035753, guid: 3a0299534dafb7849af8c54fd709d721,
+      type: 3}
     current: 0

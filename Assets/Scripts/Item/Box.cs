@@ -2,15 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAnimationEvent
-{
-    void AnimationStateEvent();
-}
-
-public class Box : Item, IAnimationEvent
+public class Box : Item
 {
     public Material[] materials;
-    [SerializeField] private Renderer renderer;
+    [SerializeField] private new Renderer renderer;
     [SerializeField] private Animator animator;
     [SerializeField] private float hideSpeed = 0.5f;
     private int openParamID;
@@ -66,10 +61,15 @@ public class Box : Item, IAnimationEvent
             
         }
 
+        DestroySelf();
+    }
+
+    private void DestroySelf()
+    {
         Destroy(gameObject);
     }
 
-    public void AnimationStateEvent()
+    public void StartHideProcess()
     {
         StartCoroutine(WaitOfAlpha());
     }

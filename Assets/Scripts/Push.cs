@@ -28,25 +28,27 @@ public class Push : MonoBehaviour
         {
             sleepCalculate.Break();
 
-            ray = Camera.main.ScreenPointToRay(SwipeCalculate.Instance.TupScreenPosition);
-
-            if (Physics.Raycast(ray, out hit, 100, mazeMask))
-            {
-                tupScreenPosition = hit.point;
-            }
-
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 100, ballMask))
+            if (Physics.Raycast(ray, Mathf.Infinity, ballMask))
             {
-                rigidbody.AddForce((transform.position - tupScreenPosition) * power);
+                Vector3 direction = new Vector3(SwipeCalculate.Instance.SwipeScreenDirection.x, 0, SwipeCalculate.Instance.SwipeScreenDirection.y);
 
-                audioSource.PlayOneShot(push);
+                direction = Camera.main.transform.TransformDirection(direction);
+                
+                OnPush(direction);
                 SwipeCalculate.Instance.ResetSwipe();
             }
         }
 
     }
-    
+
+    private void OnPush(Vector3 direction)
+    {
+        direction.y = transform.position.y;
+        Debug.DrawLine(transform.position, transform.position + (-direction * power), Color.red, 1);
+        rigidbody.AddForce(direction * power, ForceMode.VelocityChange);
+        audioSource.PlayOneShot(push);
+    }
 
 }

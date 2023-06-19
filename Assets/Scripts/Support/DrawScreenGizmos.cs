@@ -30,18 +30,14 @@ public class DrawScreenGizmos : MonoBehaviour
         this.startPixelPos = startPixelPos;
         this.endPixelPos = endPixelPos;
         draw = true;
-        Invoke(nameof(Clear), 1);
-    }
-
-    private void Clear()
-    {
-        draw = false;
     }
 
     private void OnDrawGizmos()
     {
-        if(draw)
-        ScreenGizmos.DrawLine(canvas, camera, startPixelPos, endPixelPos);
+        if (draw)
+        {
+            ScreenGizmos.DrawLine(canvas, camera, startPixelPos, endPixelPos);
+        }
     }
 
 }

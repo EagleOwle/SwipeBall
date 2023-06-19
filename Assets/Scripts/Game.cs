@@ -29,7 +29,7 @@ public class Game : MonoBehaviour, IChangeGameSate, IStartGame
 
     private void Start()
     {
-        carousel.Initialise(PrefabsStore.Instance.balls.Count);
+        //carousel.Initialise(PrefabsStore.Instance.balls.Count);
         changeBallMenu.Initialise(this, this);
 
         environment.Initialise(this);
