@@ -12,7 +12,7 @@ public class ManagerMenu : MonoBehaviour
     [SerializeField] private GameMenu gamePanel;
     [SerializeField] private PauseMenu pausePanel;
     [SerializeField] private WinMenu winPanel;
-
+    [SerializeField] private GameObject loadScreen;
 
     public void Initialise(IItemCount itemCount)
     {
@@ -23,7 +23,7 @@ public class ManagerMenu : MonoBehaviour
         HideWinMenu();
 
         itemCount.EndItem += EndItem;
-        actionChangeGameState.Invoke(GameState.Game);
+        Invoke(nameof(EndLoad), 2);
     }
 
     private void EndItem(object sender, EventArgs e)
@@ -64,6 +64,12 @@ public class ManagerMenu : MonoBehaviour
     public void ExitScene()
     {
         SceneManager.LoadScene(0);
+    }
+
+    private void EndLoad()
+    {
+        loadScreen.SetActive(false);
+        actionChangeGameState.Invoke(GameState.Game);
     }
 
     public void RestartScene()
