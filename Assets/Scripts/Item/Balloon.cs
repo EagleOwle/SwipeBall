@@ -12,7 +12,6 @@ public partial class Balloon : Item
     [SerializeField] private MeshCollider balloonCollider;
     [SerializeField] private Transform meshTransform;
 
-    private AudioSource audioSource;
     private Vector3 defaultPosition;
     private Quaternion defaultRotation;
     private Vector3 defaultMeshScale;
@@ -24,16 +23,15 @@ public partial class Balloon : Item
         defaultMeshScale = meshTransform.localScale;
     }
 
-    public void Initialise(AudioSource audioSource)
+    public void Initialise()
     {
         gameObject.SetActive(true);
-        this.audioSource = audioSource;
         EventSpace.ScreenRayHitCollider.AddListener(HitCollider);
     }
 
-    public void Initialise(float liveTime, AudioSource audioSource)
+    public void Initialise(float liveTime)
     {
-        Initialise(audioSource);
+        Initialise();
         Invoke(nameof(BalloonOnTouch), liveTime);
     }
 
@@ -50,10 +48,7 @@ public partial class Balloon : Item
 
         CancelInvoke();
         EventSpace.ScreenRayHitCollider.RemoveListener(HitCollider);
-        audioSource.PlayOneShot(pop);
-        audioSource.clip = pop;
-        audioSource.loop = false;
-        audioSource.Play();
+        PlaySoundEffect(pop);
         eventOnTouch.Invoke(this);
     }
 
@@ -72,6 +67,11 @@ public partial class Balloon : Item
         transform.localRotation = defaultRotation;
 
         gameObject.SetActive(false);
+    }
+
+    private void PlaySoundEffect(AudioClip clip)
+    {
+        SoundController.Instance.PlayClipAtPosition(clip, transform.position);
     }
 
     public class EventBallonOnTouch : UnityEvent<Balloon>

@@ -26,10 +26,10 @@ public class ManagerMenu : MonoBehaviour
         Invoke(nameof(EndLoad), 2);
     }
 
-    private void EndItem(object sender, EventArgs e)
+    private void EndItem()
     {
         HidePauseMenu();
-        ShowWinMenu();
+        Invoke(nameof(ShowWinMenu), 3);
     }
 
     public void ShowPauseMenu()
@@ -52,8 +52,8 @@ public class ManagerMenu : MonoBehaviour
 
     private void ShowWinMenu()
     {
-        winPanel.Show();
         actionChangeGameState.Invoke(GameState.Pause);
+        winPanel.Show();
     }
 
     private void HideWinMenu()

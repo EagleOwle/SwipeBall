@@ -5,33 +5,33 @@ using System;
 
 public interface IItemCount
 {
-    event EventHandler<int> ChangeItemCount;
-    event EventHandler EndItem;
+    event Action<int> ChangeItemCount;
+    event Action EndItem;
     int CurrentItemCount();
 }
 
 public class Environment : MonoBehaviour, IItemCount
 {
-    public event EventHandler<int> ChangeItemCount;
-    public event EventHandler EndItem;
+    public event Action<int> ChangeItemCount;
+    public event Action EndItem;
 
     [SerializeField] private Follow follow;
     [SerializeField] private MainSpawnPoint ballSpawnPoint;
     [SerializeField] private SpawnPoint[] spawnPoints;
     private List<Item> items = new List<Item>();
 
+    private IChangeGameSate changeGameSate;
     private Ball ball;
 
     public void Initialise(IChangeGameSate changeGameSate)
     {
+        this.changeGameSate = changeGameSate;
         foreach (var item in spawnPoints)
         {
             var tmp = Instantiate(PrefabsStore.Instance.ItemPrefabs[1], item.transform.position, Quaternion.identity);
             tmp.actionOnHit += RemoveItem;
             items.Add(tmp);
         }
-
-        changeGameSate.ChangeGameSate += ChangeGameSate;
 
         follow.actionSetTarget += CameraChangeFollow;
 
@@ -40,39 +40,24 @@ public class Environment : MonoBehaviour, IItemCount
     public void SpawnBall(Ball ballPrefab)
     {
         ball = Instantiate(ballPrefab, ballSpawnPoint.transform.position, Quaternion.identity);
-        ball.Initialise(follow);
+        ball.Initialise(follow, changeGameSate);
     }
 
     private void CameraChangeFollow(Transform followTarget)
     {
         if(followTarget == ball.transform)
         {
-            if(items.Count<=0)
+            if(items.Count <= 0)
             {
-                EndItem.Invoke(this, null);
+                EndItem?.Invoke();
             }
-        }
-    }
-
-    private void ChangeGameSate(object sender, GameState state)
-    {
-        if (ball == null) return;
-
-        switch (state)
-        {
-            case GameState.Game:
-                ball.OnPushable = true;
-                break;
-            case GameState.Pause:
-                ball.OnPushable = false;
-                break;
         }
     }
 
     private void RemoveItem(Item item)
     {
         items.Remove(item);
-        ChangeItemCount?.Invoke(this, items.Count);
+        ChangeItemCount?.Invoke(items.Count);
     }
 
     int IItemCount.CurrentItemCount()

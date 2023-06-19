@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PrefabsStore : ScriptableObject
 {
     #region Singleton
@@ -11,7 +12,7 @@ public class PrefabsStore : ScriptableObject
         {
             if (_instance == null)
             {
-                _instance = Resources.Load("PrefabsStore", typeof(PrefabsStore)) as PrefabsStore;
+                _instance = Resources.Load("PrefabsStore") as PrefabsStore;
 
                 if(_instance == null)
                 {

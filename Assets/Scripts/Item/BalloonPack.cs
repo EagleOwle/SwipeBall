@@ -7,8 +7,7 @@ public class BalloonPack : Present
 {
     [SerializeField] private float balloonLiveTime = 5;
     [SerializeField] private Balloon[] balloons;
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private Rigidbody rigidbody;
+    [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private AnimationCurve speedCurve;
     [SerializeField] private float curveMultiplier = 5;
     private List<Balloon> activeBalloons;
@@ -48,7 +47,7 @@ public class BalloonPack : Present
 
         if (activeBalloons.Count == 0)
         {
-            float length = audioSource.clip.length;
+            float length = 0;// audioSource.clip.length;
             Invoke(nameof(EndOfLive), length + Time.deltaTime);
         }
     }
@@ -60,11 +59,11 @@ public class BalloonPack : Present
         {
             if (balloonLiveTime > 0)
             {
-                balloons[i].Initialise((i + 1) * balloonLiveTime, audioSource);
+                balloons[i].Initialise((i + 1) * balloonLiveTime);
             }
             else
             {
-                balloons[i].Initialise(audioSource);
+                balloons[i].Initialise();
             }
         }
 

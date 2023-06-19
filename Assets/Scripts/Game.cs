@@ -9,19 +9,13 @@ public enum GameState
 
 public interface IChangeGameSate
 {
-    event EventHandler<GameState> ChangeGameSate;
+    event Action<GameState> ChangeGameSate;
 }
 
-public interface IStartGame
+public class Game : MonoBehaviour, IChangeGameSate
 {
-    void StartGame();
-}
+    public event Action<GameState> ChangeGameSate;
 
-public class Game : MonoBehaviour, IChangeGameSate, IStartGame
-{
-    public event EventHandler<GameState> ChangeGameSate;
-
-    [SerializeField] private CarouselPrewievPlace carousel;
     [SerializeField] private ChangeBallMenu changeBallMenu;
     [SerializeField] private ManagerMenu managerMenu;
     [SerializeField] private Environment environment;
@@ -29,10 +23,12 @@ public class Game : MonoBehaviour, IChangeGameSate, IStartGame
 
     private void Start()
     {
-        //carousel.Initialise(PrefabsStore.Instance.balls.Count);
-        changeBallMenu.Initialise(this, this);
+        Application.targetFrameRate = 30;
 
-        environment.Initialise(this);
+        environment.Initialise(this as IChangeGameSate);
+
+        changeBallMenu.EventBallIsChanged += ChangeBallMenu_EventBallIsChanged;
+        changeBallMenu.Initialise(this as IChangeGameSate);
 
         managerMenu.actionChangeGameState += OnChangeGameState;
         managerMenu.Initialise(environment);
@@ -41,14 +37,20 @@ public class Game : MonoBehaviour, IChangeGameSate, IStartGame
         audioSource.volume = musicVolume;
     }
 
-    private void OnChangeGameState(GameState state)
+    private void ChangeBallMenu_EventBallIsChanged(int value)
     {
-        ChangeGameSate.Invoke(this, state);
+        changeBallMenu.EventBallIsChanged -= ChangeBallMenu_EventBallIsChanged;
+        PrefabsStore.Instance.SetCurrentBall(value);
+        StartGame();
     }
 
-    void IStartGame.StartGame()
+    private void OnChangeGameState(GameState state)
     {
-        carousel.Hide();
+        ChangeGameSate?.Invoke(state);
+    }
+
+    private void StartGame()
+    {
         environment.SpawnBall(PrefabsStore.Instance.CurrentBallPrefab);
     }
 }

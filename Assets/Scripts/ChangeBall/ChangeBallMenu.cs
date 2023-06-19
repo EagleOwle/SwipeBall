@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,19 +6,23 @@ using UnityEngine.UI;
 
 public class ChangeBallMenu : MonoBehaviour
 {
+    public event Action<int> EventBallIsChanged;
+
     [SerializeField] private CarouselPrewievPlace carousel;
     [SerializeField] private Button startButton;
     [SerializeField] private Text blockedText;
-    [SerializeField] private IStartGame startGame;
 
-    public void Initialise(IStartGame startGame, IChangeGameSate changeGameSate)
+    public void Initialise(IChangeGameSate changeGameSate)
     {
         startButton.onClick.AddListener(OnButtonStart);
         startButton.gameObject.SetActive(true);
-        this.startGame = startGame;
         changeGameSate.ChangeGameSate += ChangeGameSate;
         carousel.actionSetCurrentPoint += SetCurrentPoint;
         SetCurrentPoint(carousel.CurrentPoint.index);
+
+        OnButtonStart();
+        //Invoke(nameof(OnButtonStart), 3);
+
     }
 
     private void SetCurrentPoint(int index)
@@ -43,11 +48,11 @@ public class ChangeBallMenu : MonoBehaviour
 
     private void OnButtonStart()
     {
-        PrefabsStore.Instance.SetCurrentBall(carousel.CurrentPoint.index);
-        startGame.StartGame();
+        carousel.Hide();
+        EventBallIsChanged?.Invoke(carousel.CurrentPoint.index);
     }
 
-    private void ChangeGameSate(object sender, GameState state)
+    private void ChangeGameSate(GameState state)
     {
         switch (state)
         {

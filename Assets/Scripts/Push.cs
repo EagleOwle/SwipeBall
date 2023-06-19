@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,24 +11,25 @@ public class Push : MonoBehaviour
     [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip push;
-    [SerializeField] private SleepCalculate sleepCalculate;
 
     private RaycastHit hit;
     private Ray ray;
     private Vector3 tupScreenPosition;
 
-    public void Enable(bool value)
+    public void SelfEnable()
     {
-        sleepCalculate.Enable(value);
-        enabled = value;
+        enabled = true;
+    }
+
+    public void SelfDisable()
+    {
+        enabled = false;
     }
 
     private void Update()
     {
         if (SwipeCalculate.Instance.OnSwipe)
         {
-            sleepCalculate.Break();
-
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, Mathf.Infinity, ballMask))
@@ -40,7 +42,6 @@ public class Push : MonoBehaviour
                 SwipeCalculate.Instance.ResetSwipe();
             }
         }
-
     }
 
     private void OnPush(Vector3 direction)

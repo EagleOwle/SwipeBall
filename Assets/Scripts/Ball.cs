@@ -5,25 +5,21 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private new Rigidbody rigidbody;
-    [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip hit;
     [SerializeField] private AudioClip pic;
     [SerializeField] private Push push;
     [SerializeField] private SleepCalculate sleepCalculate;
-    [SerializeField] private TutorialMenu tutorialMenu;
 
-    private bool onTarget = false; 
+    private bool onTarget = false;
 
-    public void Initialise(Follow follow)
+    public void Initialise(Follow follow, IChangeGameSate changeGameSate)
     {
         follow.actionSetTarget += CameraChangeFollow;
         follow.DefaultTarget = transform;
         follow.Target = transform;
         onTarget = true;
 
-        sleepCalculate.eventIsSleep += IsSleep;
-        tutorialMenu.Hide();
-
+        changeGameSate.ChangeGameSate += ChangeGameSate;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,7 +29,7 @@ public class Ball : MonoBehaviour
         if (other.TryGetComponent(out Item coin))
         {
             coin.OnHit();
-            audioSource.PlayOneShot(pic);
+            PlaySoundEffect(pic);
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
         }
@@ -44,33 +40,45 @@ public class Ball : MonoBehaviour
         if(value != this.transform)
         {
             onTarget = false;
-            OnPushable = false;
+            push.SelfDisable();
+            sleepCalculate.SelfDisable();
         }
         else
         {
             onTarget = true;
-            OnPushable = true;
+            push.SelfEnable();
+            sleepCalculate.SelfEnable();
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Pool.Instance.SpawnPooledObject(PoolElementType.Hit, transform.position, Quaternion.identity);
-        audioSource.PlayOneShot(hit);
+        if (collision.impulse.magnitude < 1) return;
+
+        Vector3 normal = collision.contacts[0].normal;
+        Quaternion rotation = Quaternion.LookRotation(normal);
+        Pool.Instance.SpawnPooledObject(PoolElementType.Hit, transform.position, rotation);
+        PlaySoundEffect(hit);
     }
 
-    public bool OnPushable
+    private void ChangeGameSate(GameState state)
     {
-        set
+        switch (state)
         {
-            push.Enable(value);
-            sleepCalculate.Enable(value);
+            case GameState.Game:
+                push.SelfEnable();
+                sleepCalculate.SelfEnable();
+                break;
+            case GameState.Pause:
+                push.SelfDisable();
+                sleepCalculate.SelfDisable();
+                break;
         }
     }
 
-    private void IsSleep()
+    private void PlaySoundEffect(AudioClip clip)
     {
-        tutorialMenu.Show();
+        SoundController.Instance.PlayClipAtPosition(clip, transform.position);
     }
 
 }

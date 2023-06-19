@@ -158,7 +158,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7c951200e13d41c4ea6549d529d8a5d2, type: 3}
+    m_Font: {fileID: 12800000, guid: 235f824345f424548ac2d50d3f6ad4b2, type: 3}
     m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 1
@@ -170,7 +170,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tap and swipe
+  m_Text: "\u0422\u043E\u043B\u043A\u043D\u0438 \u043C\u044F\u0447"
 --- !u!114 &5842540701705870655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 4277924265374958855}
   - component: {fileID: 4277924265374958873}
   - component: {fileID: 4277924265374958854}
-  - component: {fileID: 1055905302730163721}
+  - component: {fileID: 1383735655278650067}
   m_Layer: 6
   m_Name: SoccerBall
   m_TagString: Untagged
@@ -254,8 +254,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a2711f20b5708754d82f1bba266abb78, type: 2}
-  - {fileID: 2100000, guid: c628b0e69cfc9b54891f3f8e91b51475, type: 2}
+  - {fileID: 2100000, guid: cff0f8a4e9c85a045be6d610d20b87b3, type: 2}
+  - {fileID: 2100000, guid: fb69c479c3cec624b96dfe20d305c1b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -424,7 +424,6 @@ MonoBehaviour:
   rigidbody: {fileID: 4277924265374958872}
   audioSource: {fileID: 4277924265374958855}
   push: {fileID: 8300000, guid: 4a68b01a256775746a9dea6c32dc0829, type: 3}
-  sleepCalculate: {fileID: 1055905302730163721}
 --- !u!114 &4277924265374958854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,13 +437,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4277924265374958872}
-  audioSource: {fileID: 4277924265374958855}
   hit: {fileID: 8300000, guid: afcde19c076570543a7abbd2e67c3543, type: 3}
   pic: {fileID: 8300000, guid: cb4b6bedc978ab64a8d07afa980f5084, type: 3}
   push: {fileID: 4277924265374958873}
-  sleepCalculate: {fileID: 1055905302730163721}
-  tutorialMenu: {fileID: 1148892014098140686}
---- !u!114 &1055905302730163721
+  sleepCalculate: {fileID: 1383735655278650067}
+--- !u!114 &1383735655278650067
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -456,7 +453,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0e0e3dcd8ab3f149b05bd41c070ecd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSleepTime: 5
+  tutorialMenu: {fileID: 1148892014098140686}
+  rigidbody: {fileID: 4277924265374958872}
+  maxSleepTime: 10
 --- !u!1 &5588869540688715802
 GameObject:
   m_ObjectHideFlags: 0

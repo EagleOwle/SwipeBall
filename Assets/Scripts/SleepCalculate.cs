@@ -4,31 +4,63 @@ using System;
 
 public class SleepCalculate : MonoBehaviour
 {
-    public Action eventIsSleep;
+    [SerializeField] private TutorialMenu tutorialMenu;
+    [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private float maxSleepTime = 10;
-    private float sleepTime;
+    [SerializeField] private float minVelocityMagnitude = 0.3f;
 
-    public void Enable(bool value)
+    private float sleepTime;
+    private float dbVelocity;
+
+    private void Start()
     {
-        enabled = value;
         sleepTime = 0;
+        tutorialMenu.Hide();
     }
 
     private void Update()
     {
-        sleepTime += Time.deltaTime;
+        dbVelocity = rigidbody.velocity.magnitude;
 
-        if (sleepTime >= maxSleepTime)
+        if (rigidbody.velocity.magnitude < minVelocityMagnitude)
         {
+            if (sleepTime == 0)
+            {
+                sleepTime = maxSleepTime;
+            }
+        }
+        else
+        {
+            if (sleepTime > 0)
+            {
+                tutorialMenu.Hide();
+            }
+
             sleepTime = 0;
-            eventIsSleep.Invoke();
         }
 
+        if (sleepTime > 0)
+        {
+            sleepTime -= Time.deltaTime;
+
+            if (sleepTime <= 0)
+            {
+                tutorialMenu.Show();
+                sleepTime = 0;
+            }
+        }
     }
 
-    public void Break()
+    public void SelfEnable()
     {
+        enabled = true;
+    }
+
+    public void SelfDisable()
+    {
+        enabled = false;
         sleepTime = 0;
+        tutorialMenu.Hide();
     }
 
 }

@@ -12,9 +12,4 @@ public class TutorialMenu : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    public void EndAnimation()
-    {
-       Invoke(nameof(Hide),1);
-    }
 }

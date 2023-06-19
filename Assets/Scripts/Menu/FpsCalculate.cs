@@ -16,7 +16,7 @@ public class FpsCalculate : MonoBehaviour
     private float fpsNextPeriod = 0;
     private int currentFps;
 
-    public async void Start()
+    private IEnumerator Start()
     {
         fpsNextPeriod = Time.realtimeSinceStartup + fpsMeasurePeriod;
 
@@ -24,7 +24,7 @@ public class FpsCalculate : MonoBehaviour
         {
             fpsAccumulator++;
 
-            await System.Threading.Tasks.Task.Yield();
+            yield return null;
 
             if (Time.realtimeSinceStartup > fpsNextPeriod)
             {
@@ -34,7 +34,6 @@ public class FpsCalculate : MonoBehaviour
                 text.text = string.Format(display, currentFps);
             }
 
-
 #if UNITY_EDITOR
             if (EditorApplication.isPlaying == false)
             {
@@ -43,5 +42,33 @@ public class FpsCalculate : MonoBehaviour
 #endif
         }
     }
+
+//    public async void Start()
+//    {
+//        fpsNextPeriod = Time.realtimeSinceStartup + fpsMeasurePeriod;
+
+//        while (true)
+//        {
+//            fpsAccumulator++;
+
+//            await System.Threading.Tasks.Task.Yield();
+
+//            if (Time.realtimeSinceStartup > fpsNextPeriod)
+//            {
+//                currentFps = (int)(fpsAccumulator / fpsMeasurePeriod);
+//                fpsAccumulator = 0;
+//                fpsNextPeriod += fpsMeasurePeriod;
+//                text.text = string.Format(display, currentFps);
+//            }
+
+
+//#if UNITY_EDITOR
+//            if (EditorApplication.isPlaying == false)
+//            {
+//                break;
+//            }
+//#endif
+//        }
+//    }
 
 }

@@ -9,9 +9,9 @@ public class BallPresent : Present
     [SerializeField] private float speedRotation = 25;
     [SerializeField] private float speedFade = 0.1f;
     [SerializeField] private LayerMask groundMask;
-    [SerializeField] private Rigidbody rigidbody;
-    [SerializeField] private Collider collider;
-    [SerializeField] private Renderer renderer;
+    [SerializeField] private new Rigidbody rigidbody;
+    [SerializeField] private new Collider collider;
+    [SerializeField] private new Renderer renderer;
     private bool readyDestroy = false;
 
     private IEnumerator MoveToCamera()

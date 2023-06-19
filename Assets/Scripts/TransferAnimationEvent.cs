@@ -7,6 +7,6 @@ public class TransferAnimationEvent : MonoBehaviour
 
     public void EndAnimation()
     {
-        tutorialMenu.EndAnimation();
+        //tutorialMenu.EndAnimation();
     }
 }
