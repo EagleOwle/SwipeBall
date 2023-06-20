@@ -4093,7 +4093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9835d82ff47e8d3408e29618d49f6b82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothLook: 0.1
+  smoothLook: 0.3
   smoothMove: 2
   distanceBase: 8
   offset: {x: 0, y: 3, z: 0}
@@ -13440,8 +13440,8 @@ MonoBehaviour:
   Floor: {fileID: 165842, guid: 8d3b36f175a633f429d7bda54c76550d, type: 3}
   Wall: {fileID: 144206, guid: 9de82ec743bb24449a99f5cf1e325d61, type: 3}
   Pillar: {fileID: 142476, guid: f3f97a2401feba4479a301d6181e9da6, type: 3}
-  Rows: 5
-  Columns: 5
+  Rows: 4
+  Columns: 4
   CellWidth: 4
   CellHeight: 4
   AddGaps: 0

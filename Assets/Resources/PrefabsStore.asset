@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: PrefabsStore
   m_EditorClassIdentifier: Assembly-CSharp::PrefabsStore
   poolingPrefabs:
-  - {fileID: -7994130024472164892, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
   - {fileID: 1105523160608697210, guid: d4457b9fd86b1e743814612e7fb5c582, type: 3}
-  - {fileID: -274970441940285089, guid: 074e1c2d477899546bc8950b5442bd21, type: 3}
-  - {fileID: 3933625230348510461, guid: fed18a8f585b2d34ba72219835c6c978, type: 3}
+  - {fileID: -7994130024472164892, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
+  - {fileID: -8913627047094098725, guid: 074e1c2d477899546bc8950b5442bd21, type: 3}
+  - {fileID: 2816225308518197483, guid: fed18a8f585b2d34ba72219835c6c978, type: 3}
+  - {fileID: 489061160064752306, guid: 64d8827e29636c24f9c58312fbe63640, type: 3}
   itemPrefabs:
   - {fileID: 4947184301504184560, guid: aa978bb2035b8e545b108cc9bce2617a, type: 3}
   - {fileID: 6671089666222598676, guid: 6e4d88e30f34d8843b05e367fa6f9657, type: 3}
   presentPrefabs:
   - {fileID: 6923548086554284748, guid: cb298fe361cc3144b81518b4827022bb, type: 3}
+  - {fileID: -9145320042206091650, guid: a7914f6deeba9d242a38ba608b42a0e8, type: 3}
   balls:
   - name: SoccerBall
     acces: 2

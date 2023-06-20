@@ -27,6 +27,19 @@ public class SoundController : MonoBehaviour
         audioSource.volume = volume;
     }
 
+    public AudioSource PlayClipFollowTransform(AudioClip clip, Transform target)
+    {
+        GameObject go = new GameObject("One Shot Audio");
+        go.transform.parent = target;
+        go.transform.position = Vector3.zero;
+        AudioSource source = go.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.volume = PlayerPrefs.GetFloat("SoundVolume");
+        source.Play();
+        Destroy(go, source.clip.length);
+        return source;
+    }
+
     public AudioSource PlayClipAtPosition(AudioClip clip, Vector3 position)
     {
         GameObject go = new GameObject("One Shot Audio");

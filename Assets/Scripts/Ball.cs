@@ -58,7 +58,7 @@ public class Ball : MonoBehaviour
 
         Vector3 normal = collision.contacts[0].normal;
         Quaternion rotation = Quaternion.LookRotation(normal);
-        Pool.Instance.SpawnPooledObject(PoolElementType.Hit, transform.position, rotation);
+        Pool.Instance.SpawnPooledObject<CartoonHit>(transform.position, rotation);
         PlaySoundEffect(hit);
     }
 

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class PoolElement : MonoBehaviour
 {
-    public PoolElementType type;
-
     public virtual void FromPool()
     {
 
@@ -15,4 +13,5 @@ public abstract class PoolElement : MonoBehaviour
     {
         Pool.Instance.ReturnToPool(this);
     }
+
 }

@@ -32,12 +32,12 @@ public class Pool : MonoBehaviour
         {
             for (int i = 0; i < amountToPool; i++)
             {
-                InstantiateNewObject(item.type);
+              //  InstantiateNewObject(item.type);
             }
         }
     }
 
-    public PoolElement GetPooledObject(PoolElementType type)
+    public PoolElement GetPooledObject<T>() where T : PoolElement
     {
         for (int i = 0; i < pooledObjects.Count; i++)
         {
@@ -47,7 +47,7 @@ public class Pool : MonoBehaviour
                 break;
             }
 
-            if (pooledObjects[i].type == type)
+            if (pooledObjects[i] is T)
             {
                 if (pooledObjects[i].gameObject.activeInHierarchy == false)
                 {
@@ -56,19 +56,19 @@ public class Pool : MonoBehaviour
             }
         }
 
-        PoolElement tmp = InstantiateNewObject(type);
+        PoolElement tmp = InstantiateNewObject<T>();
         return tmp;
     }
 
-    public PoolElement GetNewPooledObject(PoolElementType type)
+    public PoolElement GetNewPooledObject<T>() where T : PoolElement
     {
-        PoolElement tmp = InstantiateNewObject(type);
+        PoolElement tmp = InstantiateNewObject<T>();
         return tmp;
     }
 
-    public GameObject SpawnPooledObject(PoolElementType type, Vector3 position, Quaternion rotation)
+    public GameObject SpawnPooledObject<T>(Vector3 position, Quaternion rotation) where T : PoolElement
     {
-        PoolElement tmp = GetPooledObject(type);
+        PoolElement tmp = GetPooledObject<T>();
         
         tmp.transform.parent = null;
         tmp.transform.position = position;
@@ -79,9 +79,9 @@ public class Pool : MonoBehaviour
         return tmp.gameObject;
     }
 
-    public GameObject SpawnNewPooledObject(PoolElementType type, Vector3 position, Quaternion rotation)
+    public GameObject SpawnNewPooledObject<T>( Vector3 position, Quaternion rotation) where T : PoolElement
     {
-        PoolElement tmp = GetNewPooledObject(type);
+        PoolElement tmp = GetNewPooledObject<T>();
 
         tmp.transform.parent = null;
         tmp.transform.position = position;
@@ -100,9 +100,9 @@ public class Pool : MonoBehaviour
         instance.gameObject.SetActive(false);
     }
     
-    private PoolElement InstantiateNewObject(PoolElementType type)
+    private PoolElement InstantiateNewObject<T>() where T : PoolElement
     {
-        PoolElement prefab = PrefabsStore.Instance.GetPoolingPrefabOfType(type);
+        PoolElement prefab = PrefabsStore.Instance.GetPoolingPrefabOfType<T>();
         PoolElement tmp = Instantiate(prefab);
         pooledObjects.Add(tmp);
         ReturnToPool(tmp);

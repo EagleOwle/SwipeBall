@@ -29,25 +29,26 @@ public class PrefabsStore : ScriptableObject
     [SerializeField] private PoolElement[] poolingPrefabs;
     public PoolElement[] PoolingPrefabs => poolingPrefabs;
 
-    public PoolElement GetPoolingPrefabOfType(PoolElementType type)
+    public PoolElement GetPoolingPrefabOfType<T>() where T : PoolElement
     {
         foreach (var item in poolingPrefabs)
         {
-            if(item.type == type)
+            if(item is T)
             {
                 return item;
             }
         }
 
-        Debug.LogWarning("No Prefab of type:" + type);
+        Debug.LogWarning("No Prefab of type: " + typeof(T).ToString());
         return null;
     }
 
-    [SerializeField] private Item[] itemPrefabs;
     public Item[] ItemPrefabs => itemPrefabs;
+    [SerializeField] private Item[] itemPrefabs;
 
-    [SerializeField] private Present[] presentPrefabs;
     public Present[] PresentPrefabs => presentPrefabs;
+    [SerializeField] private Present[] presentPrefabs;
+    
     public Present RandomPresent
     {
         get
@@ -59,6 +60,7 @@ public class PrefabsStore : ScriptableObject
     }
 
     public List<PresentPreference> balls;
+
     public Ball GetPrefabBallByName(string ballName)
     {
         foreach (var item in balls)
