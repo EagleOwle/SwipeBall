@@ -10,7 +10,7 @@ public interface IItemCount
     int CurrentItemCount();
 }
 
-public class Environment : MonoBehaviour, IItemCount
+public class EnvironmentOld: MonoBehaviour, IItemCount
 {
     public event Action<int> ChangeItemCount;
     public event Action EndItem;
@@ -33,14 +33,14 @@ public class Environment : MonoBehaviour, IItemCount
             items.Add(tmp);
         }
 
-        follow.actionSetTarget += CameraChangeFollow;
+        //follow.actionSetTarget += CameraChangeFollow;
 
     }
 
     public void SpawnBall(Ball ballPrefab)
     {
         ball = Instantiate(ballPrefab, ballSpawnPoint.transform.position, Quaternion.identity);
-        ball.Initialise(follow, changeGameSate);
+       // ball.Initialise(follow, changeGameSate);
     }
 
     private void CameraChangeFollow(Transform followTarget)

@@ -11,6 +11,11 @@ public abstract class BaseMenu : MonoBehaviour
         this.managerMenu = managerMenu;
     }
 
+    public virtual bool IsShow()
+    {
+        return gameObject.activeSelf;
+    }
+
     public virtual void Show()
     {
         gameObject.SetActive(true);

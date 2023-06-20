@@ -5,32 +5,12 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
-    public Action<Transform> actionSetTarget;
-    private Transform defaultTarget;
-    public Transform DefaultTarget
-    {
-        set
-        {
-            defaultTarget = value;
-        }
-        
-    }
-
     private Transform target;
     public Transform Target
     {
         set
         {
-            if(value == null)
-            {
-                target = defaultTarget;
-            }
-            else
-            {
-                target = value;
-            }
-
-            actionSetTarget.Invoke(target);
+            target = value;
         }
     }
 
@@ -38,11 +18,6 @@ public class Follow : MonoBehaviour
     [SerializeField] private float smoothMove = 1;
     [SerializeField] private float distanceBase = 5f;
     [SerializeField] private Vector3 offset;
-
-    private void Start()
-    {
-        target = defaultTarget;
-    }
 
     private void FixedUpdate()
     {

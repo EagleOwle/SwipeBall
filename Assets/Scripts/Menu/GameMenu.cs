@@ -6,18 +6,20 @@ public class GameMenu : BaseMenu
     [SerializeField] private Text itemCountText;
     [SerializeField] private Button pauseButton;
 
+    private ItemHandler itemHandler;
+
     public override void Initialise(ManagerMenu managerMenu)
     {
         base.Initialise(managerMenu);
         pauseButton.onClick.AddListener(OnPauseButton);
     }
 
-    public void Initialise(IItemCount itemCount, ManagerMenu managerMenu)
+    public void Initialise(ItemHandler itemHandler, ManagerMenu managerMenu)
     {
         Initialise(managerMenu);
-
-        itemCount.ChangeItemCount += OnChangeSceneItemCount;
-        OnChangeSceneItemCount(itemCount.CurrentItemCount());
+        this.itemHandler = itemHandler;
+        itemHandler.EventChangeItemCount += OnChangeSceneItemCount;
+        OnChangeSceneItemCount(itemHandler.CurrentItemCount());
         
     }
 
@@ -30,4 +32,12 @@ public class GameMenu : BaseMenu
     {
         managerMenu.ShowPauseMenu();
     }
+    private void OnDestroy()
+    {
+        if(itemHandler != null)
+        {
+            itemHandler.EventChangeItemCount -= OnChangeSceneItemCount;
+        }
+    }
+
 }

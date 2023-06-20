@@ -7,16 +7,16 @@ public class Ball : MonoBehaviour
     [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private AudioClip hit;
     [SerializeField] private AudioClip pic;
-    [SerializeField] private Push push;
+    [SerializeField] private ScreenToWorldCaster screenToWorldCaster;
     [SerializeField] private SleepCalculate sleepCalculate;
 
     private bool onTarget = false;
 
-    public void Initialise(Follow follow, IChangeGameSate changeGameSate)
+    public void Initialise(FollowTargetChanger follow, IChangeGameSate changeGameSate)
     {
-        follow.actionSetTarget += CameraChangeFollow;
-        follow.DefaultTarget = transform;
-        follow.Target = transform;
+        follow.EventFollowSetTarget += CameraChangeFollow;
+        follow.SetDefaultTarget(transform);
+        follow.SetTarget(transform);
         onTarget = true;
 
         changeGameSate.ChangeGameSate += ChangeGameSate;
@@ -37,23 +37,24 @@ public class Ball : MonoBehaviour
 
     private void CameraChangeFollow(Transform value)
     {
+        Debug.Log("Follow = " + value);
         if(value != this.transform)
         {
             onTarget = false;
-            push.SelfDisable();
             sleepCalculate.SelfDisable();
+            screenToWorldCaster.SelfDisable();
         }
         else
         {
             onTarget = true;
-            push.SelfEnable();
             sleepCalculate.SelfEnable();
+            screenToWorldCaster.SelfEnable();
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.impulse.magnitude < 1) return;
+        if (collision.impulse.magnitude < 1.5f) return;
 
         Vector3 normal = collision.contacts[0].normal;
         Quaternion rotation = Quaternion.LookRotation(normal);
@@ -66,12 +67,12 @@ public class Ball : MonoBehaviour
         switch (state)
         {
             case GameState.Game:
-                push.SelfEnable();
                 sleepCalculate.SelfEnable();
+                screenToWorldCaster.SelfEnable();
                 break;
             case GameState.Pause:
-                push.SelfDisable();
                 sleepCalculate.SelfDisable();
+                screenToWorldCaster.SelfDisable();
                 break;
         }
     }

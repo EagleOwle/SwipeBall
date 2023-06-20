@@ -14,32 +14,30 @@ public class ManagerMenu : MonoBehaviour
     [SerializeField] private WinMenu winPanel;
     [SerializeField] private GameObject loadScreen;
 
-    public void Initialise(IItemCount itemCount)
+    private ItemHandler itemHandler;
+
+    public void Initialise(ItemHandler itemHandler)
     {
-        gamePanel.Initialise(itemCount, this);
+        this.itemHandler = itemHandler;
+        gamePanel.Initialise(itemHandler, this);
         pausePanel.Initialise(this);
         winPanel.Initialise(this);
         HidePauseMenu();
         HideWinMenu();
 
-        itemCount.EndItem += EndItem;
         Invoke(nameof(EndLoad), 2);
-    }
-
-    private void EndItem()
-    {
-        HidePauseMenu();
-        Invoke(nameof(ShowWinMenu), 3);
     }
 
     public void ShowPauseMenu()
     {
+        if (winPanel.IsShow()) return;
         pausePanel.Show();
         actionChangeGameState.Invoke(GameState.Pause);
     }
 
     public void ResumeGame()
     {
+        if (winPanel.IsShow()) return;
         HidePauseMenu();
         HideWinMenu();
         actionChangeGameState.Invoke(GameState.Game);
@@ -50,8 +48,9 @@ public class ManagerMenu : MonoBehaviour
         pausePanel.Hide();
     }
 
-    private void ShowWinMenu()
+    public void ShowWinMenu()
     {
+        HidePauseMenu();
         actionChangeGameState.Invoke(GameState.Pause);
         winPanel.Show();
     }

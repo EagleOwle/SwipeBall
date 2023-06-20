@@ -54,7 +54,7 @@ public class BalloonPack : Present
 
     public override void Initialise()
     {
-        GameObject.FindObjectOfType<Follow>().Target = transform;
+        GameObject.FindObjectOfType<FollowTargetChanger>().SetTarget(transform);
         for (int i = 0; i < balloons.Length; i++)
         {
             if (balloonLiveTime > 0)
@@ -75,7 +75,7 @@ public class BalloonPack : Present
     public override void EndOfLive()
     {
         StopAllCoroutines();
-        GameObject.FindObjectOfType<Follow>().Target = null;
+        GameObject.FindObjectOfType<FollowTargetChanger>().SetTarget(null);
         Destroy(gameObject);
     }
 

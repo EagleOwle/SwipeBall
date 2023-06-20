@@ -16,25 +16,43 @@ public class Game : MonoBehaviour, IChangeGameSate
 {
     public event Action<GameState> ChangeGameSate;
 
+    [SerializeField] private MazeSpawner mazeSpawner;
+    [SerializeField] private ItemHandler itemHandler;
     [SerializeField] private ChangeBallMenu changeBallMenu;
     [SerializeField] private ManagerMenu managerMenu;
-    [SerializeField] private Environment environment;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private FollowTargetChanger followTargetChanger;
+
+    private Ball ball;
 
     private void Start()
     {
         Application.targetFrameRate = 30;
 
-        environment.Initialise(this as IChangeGameSate);
+        float musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+        audioSource.volume = musicVolume;
+
+        mazeSpawner.Spawn();
+        itemHandler.GenerateItem();
+
+        followTargetChanger.EventFollowSetTarget += FollowTargetChanger_EventFollowSetTarget;
 
         changeBallMenu.EventBallIsChanged += ChangeBallMenu_EventBallIsChanged;
         changeBallMenu.Initialise(this as IChangeGameSate);
 
         managerMenu.actionChangeGameState += OnChangeGameState;
-        managerMenu.Initialise(environment);
+        managerMenu.Initialise(itemHandler);
+    }
 
-        float musicVolume = PlayerPrefs.GetFloat("MusicVolume");
-        audioSource.volume = musicVolume;
+    private void FollowTargetChanger_EventFollowSetTarget(Transform followTarget)
+    {
+        if (followTarget == ball.transform)
+        {
+            if (itemHandler.CurrentItemCount() <= 0)
+            {
+                managerMenu.ShowWinMenu();
+            }
+        }
     }
 
     private void ChangeBallMenu_EventBallIsChanged(int value)
@@ -51,6 +69,7 @@ public class Game : MonoBehaviour, IChangeGameSate
 
     private void StartGame()
     {
-        environment.SpawnBall(PrefabsStore.Instance.CurrentBallPrefab);
+        ball = GameObject.FindObjectOfType<PlayerSpawnPoint>().SpawnPlayer();
+        ball.Initialise(followTargetChanger, this as IChangeGameSate);
     }
 }
