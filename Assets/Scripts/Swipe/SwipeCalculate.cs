@@ -32,8 +32,6 @@ public class SwipeCalculate : MonoBehaviour
     private bool isMobilePlatform;
     private bool isDraggin = false;
 
-    private bool isWork = true;
-
     private void Awake()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE
@@ -51,12 +49,6 @@ public class SwipeCalculate : MonoBehaviour
 
     private void Update()
     {
-        if (isWork == false)
-        {
-            ResetSwipe();
-            return;
-        }
-
         ControlInput();
         Swipe();
 

@@ -1,20 +1,9 @@
 using System;
 using UnityEngine;
 
-public enum GameState
+public class Game : MonoBehaviour, IChangeGameState
 {
-    Game,
-    Pause,
-}
-
-public interface IChangeGameSate
-{
-    event Action<GameState> ChangeGameSate;
-}
-
-public class Game : MonoBehaviour, IChangeGameSate
-{
-    public event Action<GameState> ChangeGameSate;
+    public event Action<GameState> EventOnChangeGameState;
 
     [SerializeField] private MazeSpawner mazeSpawner;
     [SerializeField] private ItemHandler itemHandler;
@@ -22,6 +11,7 @@ public class Game : MonoBehaviour, IChangeGameSate
     [SerializeField] private ManagerMenu managerMenu;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private FollowTargetChanger followTargetChanger;
+    [SerializeField] private GameStateHandler swipeGameStateHandler;
 
     private Ball ball;
 
@@ -35,14 +25,17 @@ public class Game : MonoBehaviour, IChangeGameSate
         mazeSpawner.Spawn();
         itemHandler.GenerateItem();
 
+        swipeGameStateHandler.Initialise(this as IChangeGameState);
+
         followTargetChanger.EventFollowSetTarget += FollowTargetChanger_EventFollowSetTarget;
 
         changeBallMenu.EventBallIsChanged += ChangeBallMenu_EventBallIsChanged;
-        changeBallMenu.Initialise(this as IChangeGameSate);
+        changeBallMenu.Initialise(this as IChangeGameState);
 
-        managerMenu.actionChangeGameState += OnChangeGameState;
+        managerMenu.EventOnChangeGameMenu += ManagerMenu_EventOnChangeGameMenu;
         managerMenu.Initialise(itemHandler);
     }
+
 
     private void FollowTargetChanger_EventFollowSetTarget(Transform followTarget)
     {
@@ -62,14 +55,22 @@ public class Game : MonoBehaviour, IChangeGameSate
         StartGame();
     }
 
-    private void OnChangeGameState(GameState state)
+    private void ManagerMenu_EventOnChangeGameMenu(TypeMenu value)
     {
-        ChangeGameSate?.Invoke(state);
+        switch (value)
+        {
+            case TypeMenu.GameMenu:
+                EventOnChangeGameState?.Invoke(GameState.Game);
+                break;
+            case TypeMenu.PauseMenu:
+                EventOnChangeGameState?.Invoke(GameState.Pause);
+                break;
+        }
     }
 
     private void StartGame()
     {
         ball = GameObject.FindObjectOfType<PlayerSpawnPoint>().SpawnPlayer();
-        ball.Initialise(followTargetChanger, this as IChangeGameSate);
+        ball.Initialise(followTargetChanger, this as IChangeGameState);
     }
 }

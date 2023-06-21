@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6444878680262121600}
   - component: {fileID: 2449637041024697846}
   - component: {fileID: 2719406165397540432}
-  - component: {fileID: 1148892014098140686}
   m_Layer: 5
   m_Name: TutorialMenu
   m_TagString: Untagged
@@ -78,18 +77,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1148892014098140686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2633487228284052772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac9a0491c5c8e8249af7158d6ecaff44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4232611847556395883
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,8 +188,6 @@ GameObject:
   - component: {fileID: 4277924265374958872}
   - component: {fileID: 4277924265374958873}
   - component: {fileID: 4277924265374958854}
-  - component: {fileID: 1383735655278650067}
-  - component: {fileID: 1349819681268890112}
   m_Layer: 6
   m_Name: SoccerBall
   m_TagString: Untagged
@@ -222,7 +207,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7995678893121564156}
+  - {fileID: 5426381575944227595}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -334,45 +319,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4277924265374958872}
+  tutorialObj: {fileID: 8525313997487375254}
   hit: {fileID: 8300000, guid: afcde19c076570543a7abbd2e67c3543, type: 3}
   pic: {fileID: 8300000, guid: cb4b6bedc978ab64a8d07afa980f5084, type: 3}
-  screenToWorldCaster: {fileID: 1349819681268890112}
-  sleepCalculate: {fileID: 1383735655278650067}
---- !u!114 &1383735655278650067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4277924265374958875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0e0e3dcd8ab3f149b05bd41c070ecd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialMenu: {fileID: 1148892014098140686}
-  rigidbody: {fileID: 4277924265374958872}
-  maxSleepTime: 10
-  minVelocityMagnitude: 0.3
---- !u!114 &1349819681268890112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4277924265374958875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6bbc6c05ced99f49ae08fb8dfc1100b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  push: {fileID: 4277924265374958873}
-  mazeMask:
-    serializedVersion: 2
-    m_Bits: 8
-  ballMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &5588869540688715802
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +354,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6444878680262121600}
-  m_Father: {fileID: 4271859195062915953}
+  m_Father: {fileID: 5426381575944227595}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -487,7 +436,6 @@ GameObject:
   - component: {fileID: 6725989532390569442}
   - component: {fileID: 7350242801743380240}
   - component: {fileID: 7737506121173172729}
-  - component: {fileID: 1975435072154155641}
   m_Layer: 5
   m_Name: HandImage
   m_TagString: Untagged
@@ -590,16 +538,52 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 4, y: -4}
   m_UseGraphicAlpha: 1
---- !u!114 &1975435072154155641
+--- !u!1 &8525313997487375254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5426381575944227595}
+  - component: {fileID: 5840408637600230975}
+  m_Layer: 6
+  m_Name: Tutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5426381575944227595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525313997487375254}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7995678893121564156}
+  m_Father: {fileID: 4271859195062915953}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5840408637600230975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7945301917844248553}
+  m_GameObject: {fileID: 8525313997487375254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f85b5dd3108e77408f10a28c3c8cab4, type: 3}
+  m_Script: {fileID: 11500000, guid: a0e0e3dcd8ab3f149b05bd41c070ecd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMenu: {fileID: 1148892014098140686}
+  tutorialCanvas: {fileID: 1305930454966790717}
+  rigidbody: {fileID: 4277924265374958872}
+  maxSleepTime: 5
+  minVelocityMagnitude: 0.3

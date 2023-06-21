@@ -574,7 +574,7 @@ MonoBehaviour:
   renderer: {fileID: 1447504016018650883}
   animator: {fileID: 3965351543664352284}
   spawnSurprize: {fileID: 2264407145004239224}
-  hideSpeed: 0.05
+  hideSpeed: 0.5
 --- !u!114 &2264407145004239224
 MonoBehaviour:
   m_ObjectHideFlags: 0

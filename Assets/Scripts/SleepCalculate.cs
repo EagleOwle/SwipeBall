@@ -4,7 +4,7 @@ using System;
 
 public class SleepCalculate : MonoBehaviour
 {
-    [SerializeField] private TutorialMenu tutorialMenu;
+    [SerializeField] private Canvas tutorialCanvas;
     [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private float maxSleepTime = 10;
     [SerializeField] private float minVelocityMagnitude = 0.3f;
@@ -12,10 +12,10 @@ public class SleepCalculate : MonoBehaviour
     private float sleepTime;
     private float dbVelocity;
 
-    private void Start()
+    private void OnEnable()
     {
         sleepTime = 0;
-        tutorialMenu.Hide();
+        tutorialCanvas.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -33,7 +33,7 @@ public class SleepCalculate : MonoBehaviour
         {
             if (sleepTime > 0)
             {
-                tutorialMenu.Hide();
+                tutorialCanvas.gameObject.SetActive(false);
             }
 
             sleepTime = 0;
@@ -45,7 +45,7 @@ public class SleepCalculate : MonoBehaviour
 
             if (sleepTime <= 0)
             {
-                tutorialMenu.Show();
+                tutorialCanvas.gameObject.SetActive(true);
                 sleepTime = 0;
             }
         }
@@ -60,7 +60,7 @@ public class SleepCalculate : MonoBehaviour
     {
         enabled = false;
         sleepTime = 0;
-        tutorialMenu.Hide();
+        tutorialCanvas.gameObject.SetActive(false);
     }
 
 }

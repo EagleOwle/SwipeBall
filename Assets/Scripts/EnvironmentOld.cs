@@ -20,10 +20,10 @@ public class EnvironmentOld: MonoBehaviour, IItemCount
     [SerializeField] private SpawnPoint[] spawnPoints;
     private List<Item> items = new List<Item>();
 
-    private IChangeGameSate changeGameSate;
+    private IChangeGameState changeGameSate;
     private Ball ball;
 
-    public void Initialise(IChangeGameSate changeGameSate)
+    public void Initialise(IChangeGameState changeGameSate)
     {
         this.changeGameSate = changeGameSate;
         foreach (var item in spawnPoints)

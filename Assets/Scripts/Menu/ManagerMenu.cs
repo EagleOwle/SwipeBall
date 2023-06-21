@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class ManagerMenu : MonoBehaviour
 {
-    public Action<GameState> actionChangeGameState;
+    public event Action<TypeMenu> EventOnChangeGameMenu;
 
     [SerializeField] private GameMenu gamePanel;
     [SerializeField] private PauseMenu pausePanel;
@@ -32,7 +32,7 @@ public class ManagerMenu : MonoBehaviour
     {
         if (winPanel.IsShow()) return;
         pausePanel.Show();
-        actionChangeGameState.Invoke(GameState.Pause);
+        EventOnChangeGameMenu?.Invoke(TypeMenu.PauseMenu);
     }
 
     public void ResumeGame()
@@ -40,7 +40,7 @@ public class ManagerMenu : MonoBehaviour
         if (winPanel.IsShow()) return;
         HidePauseMenu();
         HideWinMenu();
-        actionChangeGameState.Invoke(GameState.Game);
+        EventOnChangeGameMenu?.Invoke(TypeMenu.GameMenu);
     }
 
     private void HidePauseMenu()
@@ -51,7 +51,7 @@ public class ManagerMenu : MonoBehaviour
     public void ShowWinMenu()
     {
         HidePauseMenu();
-        actionChangeGameState.Invoke(GameState.Pause);
+        EventOnChangeGameMenu?.Invoke(TypeMenu.PauseMenu);
         winPanel.Show();
     }
 
@@ -68,7 +68,7 @@ public class ManagerMenu : MonoBehaviour
     private void EndLoad()
     {
         loadScreen.SetActive(false);
-        actionChangeGameState.Invoke(GameState.Game);
+        EventOnChangeGameMenu?.Invoke(TypeMenu.GameMenu);
     }
 
     public void RestartScene()

@@ -5,26 +5,44 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private new Rigidbody rigidbody;
+    [SerializeField] private GameObject tutorialObj;
     [SerializeField] private AudioClip hit;
     [SerializeField] private AudioClip pic;
-    [SerializeField] private ScreenToWorldCaster screenToWorldCaster;
-    [SerializeField] private SleepCalculate sleepCalculate;
 
-    private bool onTarget = false;
+    public bool CameraTarget => cameraTarget;
+    private bool cameraTarget = false;
 
-    public void Initialise(FollowTargetChanger follow, IChangeGameSate changeGameSate)
+    public void Initialise(FollowTargetChanger follow, IChangeGameState changeGameSate)
     {
         follow.EventFollowSetTarget += CameraChangeFollow;
         follow.SetDefaultTarget(transform);
         follow.SetTarget(transform);
-        onTarget = true;
 
-        changeGameSate.ChangeGameSate += ChangeGameSate;
+        changeGameSate.EventOnChangeGameState += ChangeGameSate_EventOnChangeGameState;
+
+        cameraTarget = true;
+        tutorialObj.SetActive(true);
+    }
+
+    private void ChangeGameSate_EventOnChangeGameState(GameState value)
+    {
+        switch (value)
+        {
+            case GameState.Game:
+                if (cameraTarget == true)
+                {
+                    tutorialObj.SetActive(true);
+                }
+                break;
+            case GameState.Pause:
+                tutorialObj.SetActive(false);
+                break;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!onTarget) return;
+        if (cameraTarget == false) return;
 
         if (other.TryGetComponent(out Item coin))
         {
@@ -37,18 +55,15 @@ public class Ball : MonoBehaviour
 
     private void CameraChangeFollow(Transform value)
     {
-        Debug.Log("Follow = " + value);
-        if(value != this.transform)
+        if (value != this.transform)
         {
-            onTarget = false;
-            sleepCalculate.SelfDisable();
-            screenToWorldCaster.SelfDisable();
+            cameraTarget = false;
+            tutorialObj.SetActive(false);
         }
         else
         {
-            onTarget = true;
-            sleepCalculate.SelfEnable();
-            screenToWorldCaster.SelfEnable();
+            cameraTarget = true;
+            tutorialObj.SetActive(true);
         }
     }
 
@@ -62,20 +77,6 @@ public class Ball : MonoBehaviour
         PlaySoundEffect(hit);
     }
 
-    private void ChangeGameSate(GameState state)
-    {
-        switch (state)
-        {
-            case GameState.Game:
-                sleepCalculate.SelfEnable();
-                screenToWorldCaster.SelfEnable();
-                break;
-            case GameState.Pause:
-                sleepCalculate.SelfDisable();
-                screenToWorldCaster.SelfDisable();
-                break;
-        }
-    }
 
     private void PlaySoundEffect(AudioClip clip)
     {

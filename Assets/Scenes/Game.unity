@@ -136,6 +136,8 @@ GameObject:
   - component: {fileID: 38137270}
   - component: {fileID: 38137272}
   - component: {fileID: 38137271}
+  - component: {fileID: 38137274}
+  - component: {fileID: 38137275}
   - component: {fileID: 38137273}
   m_Layer: 5
   m_Name: WinPanel
@@ -220,6 +222,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartButton: {fileID: 1110579737}
   exitButton: {fileID: 1217113257}
+--- !u!225 &38137274
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38137269}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &38137275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38137269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa52026636d039438cdc63eddb7072a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 38137274}
+  showSpeed: 0.5
 --- !u!1 &47893858
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,8 +766,10 @@ GameObject:
   - component: {fileID: 217178195}
   - component: {fileID: 217178194}
   - component: {fileID: 217178196}
+  - component: {fileID: 217178197}
+  - component: {fileID: 217178198}
   m_Layer: 0
-  m_Name: InputManager
+  m_Name: SwipeHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -792,6 +822,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 2006759095}
   canvas: {fileID: 1176778628}
+--- !u!114 &217178197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217178193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 617dc13e9fcb3ea458610ace33e112a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &217178198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217178193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bbc6c05ced99f49ae08fb8dfc1100b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &238886637
 GameObject:
   m_ObjectHideFlags: 0
@@ -2497,6 +2554,8 @@ GameObject:
   - component: {fileID: 965748497}
   - component: {fileID: 965748499}
   - component: {fileID: 965748498}
+  - component: {fileID: 965748501}
+  - component: {fileID: 965748500}
   m_Layer: 5
   m_Name: LoadScreen
   m_TagString: Untagged
@@ -2563,6 +2622,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965748496}
   m_CullTransparentMesh: 1
+--- !u!114 &965748500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965748496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa52026636d039438cdc63eddb7072a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 965748501}
+  showSpeed: 10
+--- !u!225 &965748501
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965748496}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &977730193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,6 +2659,8 @@ GameObject:
   - component: {fileID: 977730194}
   - component: {fileID: 977730196}
   - component: {fileID: 977730195}
+  - component: {fileID: 977730199}
+  - component: {fileID: 977730198}
   - component: {fileID: 977730197}
   m_Layer: 5
   m_Name: PausePanel
@@ -2662,6 +2749,32 @@ MonoBehaviour:
   exitButton: {fileID: 1785685409}
   musicValumeSlider: {fileID: 890446410}
   soundValumeSlider: {fileID: 1349563972}
+--- !u!114 &977730198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977730193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa52026636d039438cdc63eddb7072a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 977730199}
+  showSpeed: 10
+--- !u!225 &977730199
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977730193}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &990379965
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,6 +3385,7 @@ MonoBehaviour:
   managerMenu: {fileID: 1176778625}
   audioSource: {fileID: 1162594481}
   followTargetChanger: {fileID: 1384653097}
+  swipeGameStateHandler: {fileID: 217178197}
 --- !u!4 &1156703104
 Transform:
   m_ObjectHideFlags: 0

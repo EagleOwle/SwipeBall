@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
-    private Transform target;
     public Transform Target
     {
         set
@@ -13,7 +12,8 @@ public class Follow : MonoBehaviour
             target = value;
         }
     }
-
+    private Transform target;
+    
     [SerializeField] private float smoothLook = 1;
     [SerializeField] private float smoothMove = 1;
     [SerializeField] private float distanceBase = 5f;

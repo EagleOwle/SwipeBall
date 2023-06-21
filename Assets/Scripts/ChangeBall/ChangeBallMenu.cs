@@ -12,11 +12,11 @@ public class ChangeBallMenu : MonoBehaviour
     [SerializeField] private Button startButton;
     [SerializeField] private Text blockedText;
 
-    public void Initialise(IChangeGameSate changeGameSate)
+    public void Initialise(IChangeGameState changeGameSate)
     {
         startButton.onClick.AddListener(OnButtonStart);
         startButton.gameObject.SetActive(true);
-        changeGameSate.ChangeGameSate += ChangeGameSate;
+        changeGameSate.EventOnChangeGameState += ChangeGameSate;
         carousel.actionSetCurrentPoint += SetCurrentPoint;
         SetCurrentPoint(carousel.CurrentPoint.index);
 

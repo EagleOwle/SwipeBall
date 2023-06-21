@@ -55,11 +55,9 @@ public class Box : Item
        float dissolve = 0;
         while (dissolve < 1)
         {
-            yield return new WaitForEndOfFrame();
             renderer.material.SetFloat("_DissolveAmount", dissolve);
-            //renderer.material.SetFloat("_DissolveAmount", Mathf.Sin(Time.time) / 2 + 0.5f);
             dissolve += hideSpeed * Time.deltaTime;
-            
+            yield return null;
         }
 
         DestroySelf();
