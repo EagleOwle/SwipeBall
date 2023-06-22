@@ -19,6 +19,8 @@ public class Game : MonoBehaviour, IChangeGameState
     {
         Application.targetFrameRate = 30;
 
+        InitialiseDataPlayerPrefs();
+
         float musicVolume = PlayerPrefs.GetFloat("MusicVolume");
         audioSource.volume = musicVolume;
 
@@ -36,6 +38,21 @@ public class Game : MonoBehaviour, IChangeGameState
         managerMenu.Initialise(itemHandler);
     }
 
+
+    private void InitialiseDataPlayerPrefs()
+    {
+        if (PlayerPrefs.HasKey("MusicVolume") == false)
+        {
+
+            PlayerPrefs.SetFloat("MusicVolume", 0.4f);
+        }
+
+        if (PlayerPrefs.HasKey("SoundVolume") == false)
+        {
+
+            PlayerPrefs.SetFloat("SoundVolume", 0.4f);
+        }
+    }
 
     private void FollowTargetChanger_EventFollowSetTarget(Transform followTarget)
     {
